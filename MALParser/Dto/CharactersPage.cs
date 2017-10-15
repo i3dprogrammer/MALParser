@@ -17,7 +17,8 @@ namespace MALParser.Dto
     {
         public string CharacterName { get; set; }
         public string CharacterRole { get; set; }
-        public LinkInfo Link { get; set; }
+        public LinkInfo ImageLink { get; set; }
+        public LinkInfo CharacterLink { get; set; }
         public List<PersonInfo> VoiceOvers { get; set; }
     }
 
@@ -25,6 +26,7 @@ namespace MALParser.Dto
     {
         public string Name { get; set; }
         public string Role { get; set; }
+        public LinkInfo ImageLink { get; set; }
         public LinkInfo Link { get; set; }
     }
 }

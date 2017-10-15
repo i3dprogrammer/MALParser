@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,13 @@ namespace MALParser.Anime
             Popularity,
             Members,
             Favorites,
+            Adaptation,
+            Alternativeversion,
+            Sidestory,
+            Spinoff,
+            Otherlinks,
+            Sequel,
+            Prequel,
             None,
         }
     }
