@@ -10,5 +10,18 @@ namespace MALParser.Dto.Utility
     {
         public string Path { get; set; }
         public string Name { get; set; }
+
+        public LinkInfo() { }
+
+        public LinkInfo(string path)
+        {
+            Path = path;
+        }
+
+        public LinkInfo(string path, string name)
+        {
+            Path = path;
+            Name = name;
+        }
     }
 }

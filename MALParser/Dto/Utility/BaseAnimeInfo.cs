@@ -26,19 +26,20 @@ namespace MALParser.Dto.Utility
         public string Title { get; set; }
         public LinkInfo ImageLink { get; set; }
         public string EnglishTitle { get; set; }
-        public string SynonymouseTitle { get; set; }
+        public string SynonymsTitle { get; set; }
         public string JapaneseTitle { get; set; }
         public string Type { get; set; } //Should add enum to this..
-        public int EpisodesCount { get; set; }
+        public string Episodes { get; set; }
         public string Status { get; set; } //Should add enum to this..
         public string Aired { get; set; }
         public string Premiered { get; set; }
         public string Broadcast { get; set; }
-        public List<LinkInfo> Producers { get; set; }
-        public List<LinkInfo> Licensors { get; set; }
-        public List<LinkInfo> Studios { get; set; } //Usually only 1, yet to find a link with two
+        public List<LinkInfo> Producers { get; set; } = new List<LinkInfo>();
+        public List<LinkInfo> Licensors { get; set; } = new List<LinkInfo>();
+        //Usually only 1 studio, yet to find a link with two
+        public List<LinkInfo> Studios { get; set; } = new List<LinkInfo>();
         public SourceType Source { get; set; }
-        public List<LinkInfo> Genres { get; set; }
+        public List<LinkInfo> Genres { get; set; } = new List<LinkInfo>();
         public string Duration { get; set; }
         public string AdultyRating { get; set; }
 

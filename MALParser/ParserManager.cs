@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace MALParser
 {
-    public class Parser
+    public class ParserManager
     {
-        HttpClient client;
-
-        public Parser()
+        public ParserManager()
         {
-            client = new HttpClient();
         }
     }
 }

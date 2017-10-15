@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MALParser</RootNamespace>
     <AssemblyName>MALParser</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.6.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.6.0\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anime\Details.cs" />
+    <Compile Include="Anime\Utility.cs" />
     <Compile Include="Dto\AnimePage.cs" />
     <Compile Include="Dto\Utility\BaseAnimeInfo.cs" />
     <Compile Include="Dto\NewsPage.cs" />
@@ -49,10 +55,12 @@
     <Compile Include="Dto\RecommendationsPage.cs" />
     <Compile Include="Dto\ReviewsPage.cs" />
     <Compile Include="Dto\StatsPage.cs" />
-    <Compile Include="ParseEnums.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="Parse\ParseAnimeInfo.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="ParserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
