@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anime\Details.cs" />
+    <Compile Include="Anime\Header.cs" />
     <Compile Include="Anime\Utility.cs" />
     <Compile Include="Dto\AnimePage.cs" />
     <Compile Include="Dto\Utility\BaseAnimeInfo.cs" />
