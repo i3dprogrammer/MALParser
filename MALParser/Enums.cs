@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace MALParser
 {
-    public class Class1
+    public enum SourceType
     {
+        Anime,
+        Manga,
     }
 }
