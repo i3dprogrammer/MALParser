@@ -7,8 +7,15 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto
 {
-    public class CharactersPage : BaseAnimeInfo
+    public class CharactersPage
     {
+        public BaseAnimeInfo BaseAnimeInfo { get; set; }
+
+        public CharactersPage(BaseAnimeInfo baseAnimeInfo)
+        {
+            this.BaseAnimeInfo = baseAnimeInfo;
+        }
+
         public List<CharacterInfo> Characters { get; set; }
         public List<PersonInfo> Staff { get; set; }
     }

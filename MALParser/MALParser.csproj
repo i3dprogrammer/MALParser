@@ -46,8 +46,11 @@
   <ItemGroup>
     <Compile Include="Anime\Details.cs" />
     <Compile Include="Anime\Header.cs" />
+    <Compile Include="Anime\Pictures.cs" />
     <Compile Include="Anime\Utility.cs" />
+    <Compile Include="Anime\Videos.cs" />
     <Compile Include="Dto\AnimePage.cs" />
+    <Compile Include="Dto\PicturesPage.cs" />
     <Compile Include="Dto\Utility\BaseAnimeInfo.cs" />
     <Compile Include="Dto\NewsPage.cs" />
     <Compile Include="Dto\Utility\PersonDescriptionInfo.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Dto\RecommendationsPage.cs" />
     <Compile Include="Dto\ReviewsPage.cs" />
     <Compile Include="Dto\StatsPage.cs" />
+    <Compile Include="Dto\VideosPage.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ParserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

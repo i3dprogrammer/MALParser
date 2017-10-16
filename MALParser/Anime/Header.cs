@@ -10,12 +10,12 @@ namespace MALParser.Anime
 {
     public class Header
     {
-        internal static Dto.AnimePage Parse(string HTMLCode)
+        internal static BaseAnimeInfo Parse(string HTMLCode)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            var page = new Dto.AnimePage();
+            var page = new BaseAnimeInfo();
 
             //Parse links
             try
@@ -23,49 +23,48 @@ namespace MALParser.Anime
                 var navbarNode = doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("id", "") == "horiznav_nav");
                 foreach(var node in navbarNode.Descendants("li"))
                 {
-                    string str = node.Descendants("a").First().InnerText;
+                    string str = node.Descendants("a").First().InnerText.Trim();
                     string link = node.Descendants("a").First().GetAttributeValue("a", "");
-                    Console.WriteLine(str);
                     switch (str)
                     {
                         case "Details":
-                            page.DetailsLink = new LinkInfo(link, str);
+                            page.Link_Details = new LinkInfo(link, str);
                             break;
                         case "Videos":
-                            page.VideosLink = new LinkInfo(link, str);
+                            page.Link_Videos = new LinkInfo(link, str);
                             break;
                         case "Episodes":
-                            page.EpisodesLink = new LinkInfo(link, str);
+                            page.Link_Episodes = new LinkInfo(link, str);
                             break;
                         case "Reviews":
-                            page.ReviewsLink = new LinkInfo(link, str);
+                            page.Link_Reviews = new LinkInfo(link, str);
                             break;
                         case "Recommendations":
-                            page.RecommendationsLink = new LinkInfo(link, str);
+                            page.Link_Recommendations = new LinkInfo(link, str);
                             break;
                         case "Stats":
-                            page.StatsLink = new LinkInfo(link, str);
+                            page.Link_Stats = new LinkInfo(link, str);
                             break;
                         case "Characters & Staff":
-                            page.CharactersAndStaffLink = new LinkInfo(link, str);
+                            page.Link_CharactersAndStaff = new LinkInfo(link, str);
                             break;
                         case "News":
-                            page.NewsLink = new LinkInfo(link, str);
+                            page.Link_News = new LinkInfo(link, str);
                             break;
                         case "Forum":
-                            page.ForumLink = new LinkInfo(link, str);
+                            page.Link_Forum = new LinkInfo(link, str);
                             break;
                         case "Featured":
-                            page.FeaturedLink = new LinkInfo(link, str);
+                            page.Link_Featured = new LinkInfo(link, str);
                             break;
                         case "Clubs":
-                            page.ClubsLink = new LinkInfo(link, str);
+                            page.Link_Clubs = new LinkInfo(link, str);
                             break;
                         case "Pictures":
-                            page.PicturesLink = new LinkInfo(link, str);
+                            page.Link_Pictures = new LinkInfo(link, str);
                             break;
                         case "More info":
-                            page.MoreInfoLink = new LinkInfo(link, str);
+                            page.Link_MoreInfo = new LinkInfo(link, str);
                             break;
                     }
                 }
@@ -180,7 +179,7 @@ namespace MALParser.Anime
                             page.Duration = val;
                             break;
                         case Utility.FieldName.Rating:
-                            page.AdultyRating = val;
+                            page.AgeRating = val;
                             break;
                         case Utility.FieldName.Popularity:
                             page.Popularity = Utility.GetIntFromString(val);

@@ -7,8 +7,15 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto
 {
-    public class AnimePage : BaseAnimeInfo
+    public class AnimePage
     {
+        public BaseAnimeInfo BaseAnimeInfo { get; set; }
+
+        public AnimePage(BaseAnimeInfo baseAnimeInfo)
+        {
+            this.BaseAnimeInfo = baseAnimeInfo;
+        }
+
         //Details
         public LinkInfo PromotionalVideo { get; set; }
         public string Description { get; set; }
@@ -26,11 +33,14 @@ namespace MALParser.Dto
         public List<LinkInfo> ParentStory { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> Summary { get; set; } = new List<LinkInfo>();
 
-        public List<string> OpeningTheme { get; set; } = new List<string>();
-        public List<string> EndingTheme { get; set; } = new List<string>();
         public List<CharacterInfo> PresentedCharacters { get; set; } = new List<CharacterInfo>();
         public List<PersonInfo> PresentedStaff { get; set; } = new List<PersonInfo>();
+
+        public List<string> OpeningTheme { get; set; } = new List<string>();
+        public List<string> EndingTheme { get; set; } = new List<string>();
+
         public List<ReviewInfo> PresentedReviews { get; set; } = new List<ReviewInfo>();
         public List<RecommendationInfo> PresentedRecommendations { get; set; } = new List<RecommendationInfo>();
+
     }
 }

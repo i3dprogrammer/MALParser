@@ -9,19 +9,19 @@ namespace MALParser.Dto.Utility
     public class BaseAnimeInfo
     {
         //Links area
-        public LinkInfo DetailsLink { get; set; }
-        public LinkInfo VideosLink { get; set; }
-        public LinkInfo EpisodesLink { get; set; }
-        public LinkInfo ReviewsLink { get; set; }
-        public LinkInfo RecommendationsLink { get; set; }
-        public LinkInfo StatsLink { get; set; }
-        public LinkInfo CharactersAndStaffLink { get; set; }
-        public LinkInfo NewsLink { get; set; }
-        public LinkInfo ForumLink { get; set; }
-        public LinkInfo FeaturedLink { get; set; }
-        public LinkInfo ClubsLink { get; set; }
-        public LinkInfo PicturesLink { get; set; }
-        public LinkInfo MoreInfoLink { get; set; }
+        public LinkInfo Link_Details { get; set; }
+        public LinkInfo Link_Videos { get; set; }
+        public LinkInfo Link_Episodes { get; set; }
+        public LinkInfo Link_Reviews { get; set; }
+        public LinkInfo Link_Recommendations { get; set; }
+        public LinkInfo Link_Stats { get; set; }
+        public LinkInfo Link_CharactersAndStaff { get; set; }
+        public LinkInfo Link_News { get; set; }
+        public LinkInfo Link_Forum { get; set; }
+        public LinkInfo Link_Featured { get; set; }
+        public LinkInfo Link_Clubs { get; set; }
+        public LinkInfo Link_Pictures { get; set; }
+        public LinkInfo Link_MoreInfo { get; set; }
 
         //Main Info
         public string Title { get; set; }
@@ -42,14 +42,14 @@ namespace MALParser.Dto.Utility
         public SourceType Source { get; set; }
         public List<LinkInfo> Genres { get; set; } = new List<LinkInfo>();
         public string Duration { get; set; }
-        public string AdultyRating { get; set; }
+        public string AgeRating { get; set; }
 
         //Statistics
-        public float Score { get; set; }
-        public int UsersVoted { get; set; }
-        public int Ranked { get; set; }
-        public int Popularity { get; set; }
-        public int Members { get; set; }
-        public int Favorites { get; set; }
+        public float Score { get; set; } = -1;
+        public int UsersVoted { get; set; } = -1;
+        public int Ranked { get; set; } = -1;
+        public int Popularity { get; set; } = -1;
+        public int Members { get; set; } = -1;
+        public int Favorites { get; set; } = -1;
     }
 }

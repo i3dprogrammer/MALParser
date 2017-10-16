@@ -28,7 +28,7 @@ namespace MALParser.Anime
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            Dto.AnimePage page = Header.Parse(HTMLCode);
+            Dto.AnimePage page = new Dto.AnimePage(Header.Parse(HTMLCode));
 
             //Statistics PARSED from header, not needed.
             //Score = float.Parse(doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "fl-l score").InnerText),
@@ -222,6 +222,8 @@ namespace MALParser.Anime
                     int error = 50;
                     description = description.Remove(description.Length - error, error);
                     reviewInfo.Description = new PersonDescriptionInfo() { Description = description, By = reviewerLink };
+
+                    page.PresentedReviews.Add(reviewInfo);
                 }
             } catch (Exception ex)
             {
@@ -242,6 +244,7 @@ namespace MALParser.Anime
                     {
                         RecommendationLink = new LinkInfo(animeLink, name),
                         AnimeImageLink = new LinkInfo(imageLink),
+                        RecommendedUsers = users,
                     });
                 }
             } catch(Exception ex)
