@@ -21,6 +21,7 @@ namespace MALParser.Dto.Utility
         public LinkInfo FeaturedLink { get; set; }
         public LinkInfo ClubsLink { get; set; }
         public LinkInfo PicturesLink { get; set; }
+        public LinkInfo MoreInfoLink { get; set; }
 
         //Main Info
         public string Title { get; set; }

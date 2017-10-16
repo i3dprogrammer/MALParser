@@ -25,5 +25,6 @@ namespace MALParser.Dto
         public PersonDescriptionInfo Description { get; set; }
         public string EpisodesSeen { get; set; }
         public int PeopleFoundHelpful { get; set; }
+        public LinkInfo ImageLink { get; set; }
     }
 }

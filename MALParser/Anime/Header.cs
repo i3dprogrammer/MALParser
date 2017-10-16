@@ -16,6 +16,64 @@ namespace MALParser.Anime
             doc.LoadHtml(HTMLCode);
 
             var page = new Dto.AnimePage();
+
+            //Parse links
+            try
+            {
+                var navbarNode = doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("id", "") == "horiznav_nav");
+                foreach(var node in navbarNode.Descendants("li"))
+                {
+                    string str = node.Descendants("a").First().InnerText;
+                    string link = node.Descendants("a").First().GetAttributeValue("a", "");
+                    switch (str)
+                    {
+                        case "Details":
+                            page.DetailsLink = new LinkInfo(link, str);
+                            break;
+                        case "Videos":
+                            page.VideosLink = new LinkInfo(link, str);
+                            break;
+                        case "Episodes":
+                            page.EpisodesLink = new LinkInfo(link, str);
+                            break;
+                        case "Reviews":
+                            page.ReviewsLink = new LinkInfo(link, str);
+                            break;
+                        case "Recommendations":
+                            page.RecommendationsLink = new LinkInfo(link, str);
+                            break;
+                        case "Stats":
+                            page.StatsLink = new LinkInfo(link, str);
+                            break;
+                        case "Characters & Staff":
+                            page.CharactersAndStaffLink = new LinkInfo(link, str);
+                            break;
+                        case "News":
+                            page.NewsLink = new LinkInfo(link, str);
+                            break;
+                        case "Forum":
+                            page.ForumLink = new LinkInfo(link, str);
+                            break;
+                        case "Featured":
+                            page.FeaturedLink = new LinkInfo(link, str);
+                            break;
+                        case "Clubs":
+                            page.ClubsLink = new LinkInfo(link, str);
+                            break;
+                        case "Pictures":
+                            page.PicturesLink = new LinkInfo(link, str);
+                            break;
+                        case "More info":
+                            page.MoreInfoLink = new LinkInfo(link, str);
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.StackTrace);
+            }
+
             try
             {
                 page.Title = HtmlEntity.DeEntitize(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "name").InnerText);
@@ -24,6 +82,7 @@ namespace MALParser.Anime
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
             }
+
             try
             {
                 page.ImageLink = new LinkInfo(doc.DocumentNode.Descendants("img").First(x => x.GetAttributeValue("itemprop", "") == "image").Attributes["src"].Value);
@@ -32,15 +91,17 @@ namespace MALParser.Anime
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
             }
+
             try
             {
-                page.Score = float.Parse(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingValue").InnerText);
                 page.UsersVoted = Utility.GetIntFromString(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingCount").InnerText);
+                page.Score = float.Parse(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingValue").InnerText);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
             }
+
             try
             {
                 var node = doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("data-id", "") == "info2").InnerText; //TODO get page.Ranked
@@ -49,6 +110,7 @@ namespace MALParser.Anime
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
             }
+
             try
             {
                 HtmlNode startDivNode = doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "spaceit_pad");
@@ -119,12 +181,6 @@ namespace MALParser.Anime
                         case Utility.FieldName.Rating:
                             page.AdultyRating = val;
                             break;
-                        //case Utility.FieldName.Score:
-                        //    page.Score = Utility.GetIntFromString(val);
-                        //    break;
-                        //case Utility.FieldName.Ranked:
-                        //    page.Ranked = Utility.GetIntFromString(val);
-                        //    break;
                         case Utility.FieldName.Popularity:
                             page.Popularity = Utility.GetIntFromString(val);
                             break;

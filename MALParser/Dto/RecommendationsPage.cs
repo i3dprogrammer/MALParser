@@ -14,7 +14,7 @@ namespace MALParser.Dto
 
     public class RecommendationInfo
     {
-        public string AnimeTitle { get; set; }
+        public LinkInfo RecommendationLink { get; set; }
         public LinkInfo AnimeImageLink { get; set; }
         public List<PersonDescriptionInfo> Reviews { get; set; }
     }

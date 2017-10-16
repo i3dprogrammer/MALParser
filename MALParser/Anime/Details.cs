@@ -118,12 +118,15 @@ namespace MALParser.Anime
                 {
                     foreach (var table in div.ChildNodes.Where(x => x.Name == "table"))
                     {
+                        //Left part
                         Dto.CharacterInfo charInfo = new Dto.CharacterInfo();
                         var charLink = table.Descendants("td").ElementAt(1).Descendants("a").First().GetAttributeValue("href", "");
                         charInfo.CharacterName = table.Descendants("td").ElementAt(1).Descendants("a").First().InnerText.Trim();
                         charInfo.CharacterLink = new LinkInfo(charLink, charInfo.CharacterName);
                         charInfo.CharacterRole = table.Descendants("td").ElementAt(1).Descendants("small").First().InnerText.Trim();
                         charInfo.ImageLink = new LinkInfo(table.Descendants("img").First().GetAttributeValue("src", ""));
+
+                        //Right part
                         charInfo.VoiceOvers = new List<Dto.PersonInfo>();
                         foreach(var vo in table.Descendants("tr").First().ChildNodes.Where(x => x.Name == "td").Last().Descendants("tr"))
                         {
@@ -153,7 +156,6 @@ namespace MALParser.Anime
                     person.Name = table.Descendants("td").ElementAt(1).Descendants("a").First().InnerText.Trim();
                     person.Link = new LinkInfo(table.Descendants("td").ElementAt(1).Descendants("a").First().GetAttributeValue("href", ""), person.Name);
                     person.Role = table.Descendants("td").ElementAt(1).Descendants("small").First().InnerText.Trim();
-                    Console.WriteLine(person.Name + " -> " + person.Role);
                     page.PresentedStaff.Add(person);
                 }
             }
@@ -162,6 +164,84 @@ namespace MALParser.Anime
                 Console.WriteLine(ex.Message + ex.StackTrace);
             }
 
+            //Parse opening/ending themes
+            try
+            {
+                //Opening
+                var openingNode = doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "theme-songs js-theme-songs opnening");
+                foreach (var node in openingNode.Descendants("span"))
+                    page.OpeningTheme.Add(HtmlEntity.DeEntitize(node.InnerText));
+
+                //Ending
+                var endingNode = doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "theme-songs js-theme-songs ending");
+                foreach (var node in endingNode.Descendants("span"))
+                    page.EndingTheme.Add(HtmlEntity.DeEntitize(node.InnerText));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.StackTrace);
+            }
+
+            //Parse presented reviews
+            try
+            {
+                var reviewNodes = doc.DocumentNode.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "borderDark");
+                foreach(var review in reviewNodes)
+                {
+                    Dto.ReviewInfo reviewInfo = new Dto.ReviewInfo();
+                    //Left part
+                    var leftNode = review.Descendants("div").First(x => x.GetAttributeValue("class", "") == "spaceit").Descendants("tr").First();
+                    reviewInfo.ImageLink = new LinkInfo(leftNode.Descendants("img").First().GetAttributeValue("src", ""));
+                    var reviewerLink = new LinkInfo(leftNode.Descendants("a").First().GetAttributeValue("href", ""));
+                    reviewInfo.AllReviewsByThisGuy = new LinkInfo(leftNode.Descendants("a").Last().GetAttributeValue("href", ""));
+                    reviewInfo.PeopleFoundHelpful = Utility.GetIntFromString(leftNode.Descendants("div").Last().Descendants("span").First().InnerText);
+
+                    //Right part
+                    var mb8Node = review.Descendants("div").First(x => x.GetAttributeValue("class", "") == "mb8");
+                    reviewInfo.Date = DateTime.Parse(HtmlEntity.DeEntitize(mb8Node.Descendants("div").First().InnerText));
+                    reviewInfo.EpisodesSeen = HtmlEntity.DeEntitize(mb8Node.Descendants("div").ElementAt(1).InnerText);
+
+                    //Description and Rating
+                    var descriptionNode = review.Descendants("div").First(x => x.GetAttributeValue("class", "") == "spaceit textReadability word-break pt8 mt8");
+                    var ratings = descriptionNode.Descendants("tr");
+                    reviewInfo.OverallRating = Utility.GetIntFromString(ratings.ElementAt(0).Descendants("td").ElementAt(1).InnerText);
+                    reviewInfo.StoryRating = Utility.GetIntFromString(ratings.ElementAt(1).Descendants("td").ElementAt(1).InnerText);
+                    reviewInfo.AnimationRating = Utility.GetIntFromString(ratings.ElementAt(2).Descendants("td").ElementAt(1).InnerText);
+                    reviewInfo.SoundRating = Utility.GetIntFromString(ratings.ElementAt(3).Descendants("td").ElementAt(1).InnerText);
+                    reviewInfo.CharacterRating = Utility.GetIntFromString(ratings.ElementAt(4).Descendants("td").ElementAt(1).InnerText);
+                    reviewInfo.EnjoymentRating = Utility.GetIntFromString(ratings.ElementAt(5).Descendants("td").ElementAt(1).InnerText);
+                    var description = HtmlEntity.DeEntitize(descriptionNode.InnerText.Replace(descriptionNode.Descendants("div").First().InnerText, "")).Trim();
+                    int error = 50;
+                    description = description.Remove(description.Length - error, error);
+                    reviewInfo.Description = new PersonDescriptionInfo() { Description = description, By = reviewerLink };
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.StackTrace);
+            }
+
+            //Parse anime recommendations
+            try
+            {
+                var recommendations = doc.DocumentNode.Descendants("ul").First(x => x.GetAttributeValue("class", "") == "anime-slide js-anime-slide");
+                foreach(var recommend in recommendations.ChildNodes)
+                {
+                    string name = HtmlEntity.DeEntitize(recommend.Descendants("span").First(x => x.GetAttributeValue("class", "") == "title fs10").InnerText).Trim();
+                    int users = Utility.GetIntFromString(recommend.Descendants("span").First(x => x.GetAttributeValue("class", "") == "users").InnerText);
+                    string animeLink = recommend.Descendants("a").First().GetAttributeValue("href", "");
+                    string imageLink = recommend.Descendants("img").First().GetAttributeValue("src", "");
+                    page.PresentedRecommendations.Add(new Dto.RecommendationInfo()
+                    {
+                        RecommendationLink = new LinkInfo(animeLink, name),
+                        AnimeImageLink = new LinkInfo(imageLink),
+                    });
+                    Console.WriteLine($"{name} #{users}");
+                }
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.StackTrace);
+            }
 #if tests
             //Console.WriteLine(page.Title);
             //Console.WriteLine(page.ImageLink.Path);
