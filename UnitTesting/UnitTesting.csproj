@@ -54,6 +54,7 @@
     <Compile Include="Anime\HeaderUnitTest.cs" />
     <Compile Include="Anime\DetailsUnitTest.cs" />
     <Compile Include="Anime\PicturesUnitTest.cs" />
+    <Compile Include="Anime\CharactersUnitTest.cs" />
     <Compile Include="Anime\VideosUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

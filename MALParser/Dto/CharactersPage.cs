@@ -16,8 +16,8 @@ namespace MALParser.Dto
             this.BaseAnimeInfo = baseAnimeInfo;
         }
 
-        public List<CharacterInfo> Characters { get; set; }
-        public List<PersonInfo> Staff { get; set; }
+        public List<CharacterInfo> Characters { get; set; } = new List<CharacterInfo>();
+        public List<PersonInfo> Staff { get; set; } = new List<PersonInfo>();
     }
 
     public class CharacterInfo
@@ -26,7 +26,7 @@ namespace MALParser.Dto
         public string CharacterRole { get; set; }
         public LinkInfo ImageLink { get; set; }
         public LinkInfo CharacterLink { get; set; }
-        public List<PersonInfo> VoiceOvers { get; set; }
+        public List<PersonInfo> VoiceOvers { get; set; } = new List<PersonInfo>();
     }
 
     public class PersonInfo

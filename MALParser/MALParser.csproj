@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anime\Characters.cs" />
     <Compile Include="Anime\Details.cs" />
     <Compile Include="Anime\Header.cs" />
     <Compile Include="Anime\Pictures.cs" />
