@@ -25,6 +25,7 @@ namespace MALParser.Anime
                 {
                     string str = node.Descendants("a").First().InnerText;
                     string link = node.Descendants("a").First().GetAttributeValue("a", "");
+                    Console.WriteLine(str);
                     switch (str)
                     {
                         case "Details":
@@ -169,7 +170,7 @@ namespace MALParser.Anime
                                 page.Studios.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
                         case Utility.FieldName.Source:
-                            page.Source = (SourceType)Enum.Parse(typeof(SourceType), val);
+                            page.Source = (SourceType)Enum.Parse(typeof(SourceType), val.Replace(" ", ""));
                             break;
                         case Utility.FieldName.Genres:
                             foreach (var item in node.Descendants().Where(x => x.Name == "a"))

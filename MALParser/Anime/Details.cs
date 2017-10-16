@@ -1,5 +1,4 @@
-﻿#define tests
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -98,11 +97,19 @@ namespace MALParser.Anime
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.SpinOff.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
+                        case Utility.FieldName.Other:
                         case Utility.FieldName.Otherlinks:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.OtherLinks.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-
+                        case Utility.FieldName.Parentstory:
+                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
+                                page.ParentStory.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
+                            break;
+                        case Utility.FieldName.Summary:
+                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
+                                page.Summary.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
+                            break;
                     }
                 }
             } catch (Exception ex)
@@ -236,52 +243,12 @@ namespace MALParser.Anime
                         RecommendationLink = new LinkInfo(animeLink, name),
                         AnimeImageLink = new LinkInfo(imageLink),
                     });
-                    Console.WriteLine($"{name} #{users}");
                 }
             } catch(Exception ex)
             {
                 Console.WriteLine(ex.Message + ex.StackTrace);
             }
-#if tests
-            //Console.WriteLine(page.Title);
-            //Console.WriteLine(page.ImageLink.Path);
-            //Console.WriteLine(page.Description);
-            //Console.WriteLine(page.PromotionalVideo.Path);
-            //Console.WriteLine(page.EnglishTitle);
-            //Console.WriteLine(page.SynonymsTitle);
-            //Console.WriteLine(page.JapaneseTitle);
-            //Console.WriteLine(page.Type);
-            //Console.WriteLine(page.Episodes);
-            //Console.WriteLine(page.Status);
-            //Console.WriteLine(page.Aired);
-            //Console.WriteLine(page.Premiered);
-            //Console.WriteLine(page.Broadcast);
-            //Console.WriteLine(page.Source);
-            //Console.WriteLine(page.Duration);
-            //Console.WriteLine(page.AdultyRating);
-            //Console.WriteLine(page.Score);
-            //Console.WriteLine(page.UsersVoted);
-            //Console.WriteLine(page.Ranked);
-            //Console.WriteLine(page.Popularity);
-            //Console.WriteLine(page.Members);
-            //Console.WriteLine(page.Favorites);
-            //page.Producers.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine();
-            //page.Licensors.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine();
-            //page.Genres.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine();
-            //page.Studios.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine();
-            //page.Adaptation.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine("#########");
-            //page.AlternativeVersion.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine("#########");
-            //page.SideStory.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine("#########");
-            //page.SpinOff.ForEach(x => Console.Write(x.Name + ", "));
-            //Console.WriteLine("#########");
-#endif
+
             return page;
         }
 

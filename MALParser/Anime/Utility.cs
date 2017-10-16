@@ -60,8 +60,11 @@ namespace MALParser.Anime
             Sidestory,
             Spinoff,
             Otherlinks,
+            Other,
             Sequel,
             Prequel,
+            Summary,
+            Parentstory,
             None,
         }
     }

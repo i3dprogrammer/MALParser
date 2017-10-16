@@ -13,6 +13,9 @@ namespace MALParser.Dto
         public LinkInfo PromotionalVideo { get; set; }
         public string Description { get; set; }
         public string Background { get; set; }
+
+        //TODO: Should drop all this and change it to Dictionary<string, List<LinkInfo>> for easier usage?
+        //TODO: Shouldn't initalize all of them like that. Initialize the used ones only!
         public List<LinkInfo> Adaptation { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> Prequel { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> Sequel { get; set; } = new List<LinkInfo>();
@@ -20,6 +23,9 @@ namespace MALParser.Dto
         public List<LinkInfo> SpinOff { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> AlternativeVersion { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> OtherLinks { get; set; } = new List<LinkInfo>();
+        public List<LinkInfo> ParentStory { get; set; } = new List<LinkInfo>();
+        public List<LinkInfo> Summary { get; set; } = new List<LinkInfo>();
+
         public List<string> OpeningTheme { get; set; } = new List<string>();
         public List<string> EndingTheme { get; set; } = new List<string>();
         public List<CharacterInfo> PresentedCharacters { get; set; } = new List<CharacterInfo>();

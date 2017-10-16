@@ -10,5 +10,8 @@ namespace MALParser
     {
         Anime,
         Manga,
+        Visualnovel,
+        Lightnovel,
+        Original,
     }
 }
