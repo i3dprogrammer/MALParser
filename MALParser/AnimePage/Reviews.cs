@@ -29,7 +29,7 @@ namespace MALParser.AnimePage
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            ReviewsPageData page = new ReviewsPageData(Header.Parse(HTMLCode));
+            ReviewsPageData page = new ReviewsPageData(Header.AnalyzeHeader(HTMLCode));
 
             //Parse presented reviews
             try
@@ -68,7 +68,7 @@ namespace MALParser.AnimePage
                     page.Reviews.Add(reviewInfo);
                 }
 
-                if (doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "ml4").InnerText != "")
+                if (doc.DocumentNode.Descendants("div").Any(x => x.GetAttributeValue("class", "") == "ml4") && doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "ml4").InnerText != "")
                 {
                     string mainLink = link.Split('/').Take(link.Split('/').Length - 1).Aggregate((x, y) => x + "/" + y) + "/";
                     page.PreviousPageLink = new LinkInfo(mainLink + doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "ml4").Descendants("a").First().GetAttributeValue("href", ""));

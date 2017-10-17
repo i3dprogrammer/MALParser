@@ -13,6 +13,8 @@ namespace MALParser
         Visualnovel,
         Lightnovel,
         Original,
+        Novel,
+        Webmanga,
     }
 
     public enum FieldName

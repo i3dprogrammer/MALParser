@@ -28,10 +28,13 @@ namespace MALParser.AnimePage
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            EpisodesPageData page = new EpisodesPageData(Header.Parse(HTMLCode));
+            EpisodesPageData page = new EpisodesPageData(Header.AnalyzeHeader(HTMLCode));
 
             try
             {
+                if (!doc.DocumentNode.Descendants("table").Any(x => x.GetAttributeValue("class", "") == "mt8 episode_list js-watch-episode-list ascend"))
+                    return page;
+
                 var mainNode = doc.DocumentNode.Descendants("table").First(x => x.GetAttributeValue("class", "") == "mt8 episode_list js-watch-episode-list ascend")
                     .Descendants("tr").Where(x => x.GetAttributeValue("class", "") == "episode-list-data");
                 

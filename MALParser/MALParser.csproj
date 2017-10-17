@@ -44,15 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Anime\Characters.cs" />
-    <Compile Include="Anime\Details.cs" />
-    <Compile Include="Anime\Episodes.cs" />
-    <Compile Include="Anime\Header.cs" />
-    <Compile Include="Anime\Pictures.cs" />
-    <Compile Include="Anime\Reviews.cs" />
-    <Compile Include="Anime\Stats.cs" />
-    <Compile Include="Anime\Utility.cs" />
-    <Compile Include="Anime\Videos.cs" />
+    <Compile Include="AnimePage\Characters.cs" />
+    <Compile Include="AnimePage\Controller.cs" />
+    <Compile Include="AnimePage\Details.cs" />
+    <Compile Include="AnimePage\Episodes.cs" />
+    <Compile Include="AnimePage\Header.cs" />
+    <Compile Include="AnimePage\Pictures.cs" />
+    <Compile Include="AnimePage\Reviews.cs" />
+    <Compile Include="AnimePage\Stats.cs" />
+    <Compile Include="AnimePage\Utility.cs" />
+    <Compile Include="AnimePage\Videos.cs" />
     <Compile Include="Dto\DetailsPageData.cs" />
     <Compile Include="Dto\EpisodesPageData.cs" />
     <Compile Include="Dto\PicturesPageData.cs" />

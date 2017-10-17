@@ -29,7 +29,7 @@ namespace MALParser.AnimePage
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            PicturesPageData page = new PicturesPageData(Header.Parse(HTMLCode));
+            PicturesPageData page = new PicturesPageData(Header.AnalyzeHeader(HTMLCode));
 
             try
             {

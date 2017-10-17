@@ -29,7 +29,7 @@ namespace MALParser.AnimePage
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            CharactersPageData page = new CharactersPageData(Header.Parse(HTMLCode));
+            CharactersPageData page = new CharactersPageData(Header.AnalyzeHeader(HTMLCode));
 
             //Parse characters
             try

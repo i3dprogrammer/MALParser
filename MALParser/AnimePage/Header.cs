@@ -3,14 +3,27 @@ using MALParser.Dto.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MALParser.AnimePage
 {
-    public class Header
+    internal class Header
     {
-        internal static BaseAnimeInfo Parse(string HTMLCode)
+        private static HttpClient client = new HttpClient();
+
+        public static async Task<BaseAnimeInfo> ParseAsync(string link)
+        {
+            return AnalyzeHeader(await client.GetStringAsync(link));
+        }
+
+        public static BaseAnimeInfo Parse(string link)
+        {
+            return AnalyzeHeader(client.GetStringAsync(link).Result);
+        }
+
+        public static BaseAnimeInfo AnalyzeHeader(string HTMLCode)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
@@ -24,7 +37,9 @@ namespace MALParser.AnimePage
                 foreach(var node in navbarNode.Descendants("li"))
                 {
                     string str = node.Descendants("a").First().InnerText.Trim();
-                    string link = node.Descendants("a").First().GetAttributeValue("a", "");
+                    string link = node.Descendants("a").First().GetAttributeValue("href", "");
+                    link = Utility.GetCorrectLinkFormat(link);
+                    
                     switch (str)
                     {
                         case "Details":
@@ -95,7 +110,9 @@ namespace MALParser.AnimePage
             try
             {
                 page.UsersVoted = Utility.GetIntFromString(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingCount").InnerText);
-                page.Score = float.Parse(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingValue").InnerText);
+                float score;
+                float.TryParse(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingValue").InnerText, out score);
+                page.Score = score;
             }
             catch (Exception ex)
             {

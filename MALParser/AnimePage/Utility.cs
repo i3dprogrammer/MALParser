@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MALParser.AnimePage
 {
     //TODO: make it internal.
-    public class Utility
+    internal class Utility
     {
         internal static int GetIntFromString(string text)
         {
@@ -31,5 +31,19 @@ namespace MALParser.AnimePage
             else
                 return (FieldName)Enum.Parse(typeof(FieldName), text.Split(':')[0]);
         }
+
+        internal static string GetCorrectLinkFormat(string wrongFormat)
+        {
+            if (wrongFormat.StartsWith("http"))
+                return wrongFormat;
+            else if (wrongFormat.StartsWith("/"))
+            {
+                return "https://myanimelist.net" + wrongFormat;
+            }
+            else
+            {
+                return ""; //Should get the main link in here, and return the extra, but w/e
+            }
+        } 
     }
 }

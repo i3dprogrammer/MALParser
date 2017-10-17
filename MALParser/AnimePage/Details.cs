@@ -28,7 +28,7 @@ namespace MALParser.AnimePage
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            Dto.DetailsPageData page = new Dto.DetailsPageData(Header.Parse(HTMLCode));
+            Dto.DetailsPageData page = new Dto.DetailsPageData(Header.AnalyzeHeader(HTMLCode));
 
             //Statistics PARSED from header, not needed.
             //Score = float.Parse(doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "fl-l score").InnerText),

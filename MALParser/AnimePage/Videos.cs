@@ -27,7 +27,7 @@ namespace MALParser.AnimePage
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            VideosPageData page = new VideosPageData(Header.Parse(HTMLCode));
+            VideosPageData page = new VideosPageData(Header.AnalyzeHeader(HTMLCode));
 
             try
             {
