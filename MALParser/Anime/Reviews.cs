@@ -14,22 +14,22 @@ namespace MALParser.Anime
     {
         private static HttpClient client = new HttpClient();
 
-        public static async Task<ReviewsPage> ParseAsync(string link)
+        public static async Task<ReviewsPageData> ParseAsync(string link)
         {
             return AnalyzeDocument(await client.GetStringAsync(link), link);
         }
 
-        public static ReviewsPage Parse(string link)
+        public static ReviewsPageData Parse(string link)
         {
             return AnalyzeDocument(client.GetStringAsync(link).Result, link);
         }
 
-        private static ReviewsPage AnalyzeDocument(string HTMLCode, string link)
+        private static ReviewsPageData AnalyzeDocument(string HTMLCode, string link)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            ReviewsPage page = new ReviewsPage(Header.Parse(HTMLCode));
+            ReviewsPageData page = new ReviewsPageData(Header.Parse(HTMLCode));
 
             //Parse presented reviews
             try

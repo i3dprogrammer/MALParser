@@ -7,11 +7,11 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto
 {
-    public class ReviewsPage
+    public class ReviewsPageData
     {
         public BaseAnimeInfo BaseAnimeInfo { get; set; }
 
-        public ReviewsPage(BaseAnimeInfo baseAnimeInfo)
+        public ReviewsPageData(BaseAnimeInfo baseAnimeInfo)
         {
             this.BaseAnimeInfo = baseAnimeInfo;
         }
@@ -26,7 +26,7 @@ namespace MALParser.Dto
         internal LinkInfo NextPageLink { get; set; }
         internal LinkInfo PreviousPageLink { get; set; }
 
-        public async Task<ReviewsPage> ParseNextPageAsync()
+        public async Task<ReviewsPageData> ParseNextPageAsync()
         {
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
@@ -34,7 +34,7 @@ namespace MALParser.Dto
             return await MALParser.Anime.Reviews.ParseAsync(NextPageLink.Path);
         }
 
-        public ReviewsPage ParseNextPage()
+        public ReviewsPageData ParseNextPage()
         {
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
@@ -42,7 +42,7 @@ namespace MALParser.Dto
             return MALParser.Anime.Reviews.Parse(NextPageLink.Path);
         }
 
-        public async Task<ReviewsPage> ParsePreviousPageAsync()
+        public async Task<ReviewsPageData> ParsePreviousPageAsync()
         {
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
@@ -50,7 +50,7 @@ namespace MALParser.Dto
             return await MALParser.Anime.Reviews.ParseAsync(PreviousPageLink.Path);
         }
 
-        public ReviewsPage ParsePreviousPage()
+        public ReviewsPageData ParsePreviousPage()
         {
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");

@@ -7,11 +7,11 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto
 {
-    public class StatsPage
+    public class StatsPageData
     {
         public BaseAnimeInfo BaseAnimeInfo { get; set; }
 
-        public StatsPage(BaseAnimeInfo baseAnimeInfo)
+        public StatsPageData(BaseAnimeInfo baseAnimeInfo)
         {
             this.BaseAnimeInfo = baseAnimeInfo;
         }
@@ -23,6 +23,6 @@ namespace MALParser.Dto
         public int PlatToWatch { get; set; }
         public int Total { get; set; }
 
-        //TODO: Add the rest of the page.
+        Dictionary<int, long> ScoreStats { get; set; } = new Dictionary<int, long>();
     }
 }

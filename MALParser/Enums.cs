@@ -38,6 +38,11 @@ namespace MALParser
         Popularity,
         Members,
         Favorites,
+        None,
+    }
+
+    public enum RelatedAnime
+    {
         Adaptation,
         Alternativeversion,
         Sidestory,
@@ -49,6 +54,6 @@ namespace MALParser
         Summary,
         Parentstory,
         Characters,
-        None,
+        None
     }
 }

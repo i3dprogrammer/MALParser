@@ -11,7 +11,7 @@ namespace UnitTesting.Anime
         public void BaseAnimeInfo_ParsedCorrectly()
         {
             string testLink = "https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood/";
-            AnimePage testPage = MALParser.Anime.Details.Parse(testLink);
+            AnimePageData testPage = MALParser.Anime.Details.Parse(testLink);
 
             //Header Navbar
             Assert.IsNotNull(testPage.BaseAnimeInfo.Link_Details);

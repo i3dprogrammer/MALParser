@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MALParser.Dto
 {
-    public class PicturesPage
+    public class PicturesPageData
     {
         public BaseAnimeInfo BaseAnimeInfo { get; set; }
 
-        public PicturesPage(BaseAnimeInfo baseAnimeInfo)
+        public PicturesPageData(BaseAnimeInfo baseAnimeInfo)
         {
             this.BaseAnimeInfo = baseAnimeInfo;
         }

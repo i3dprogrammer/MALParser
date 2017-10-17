@@ -11,7 +11,7 @@ namespace UnitTesting.Anime
         public void AnimeReviewsPage_ParsedCorrectly()
         {
             string testLink = "https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood/reviews";
-            ReviewsPage page = MALParser.Anime.Reviews.Parse(testLink);
+            ReviewsPageData page = MALParser.Anime.Reviews.Parse(testLink);
 
             Assert.AreEqual(page.Reviews.Count, 20);
 

@@ -13,22 +13,22 @@ namespace MALParser.Anime
     {
         private static HttpClient client = new HttpClient();
 
-        public static async Task<Dto.AnimePage> ParseAsync(string link)
+        public static async Task<Dto.AnimePageData> ParseAsync(string link)
         {
             return AnalyzeDocument(await client.GetStringAsync(link));
         }
 
-        public static Dto.AnimePage Parse(string link)
+        public static Dto.AnimePageData Parse(string link)
         {
             return AnalyzeDocument(client.GetStringAsync(link).Result);
         }
 
-        private static Dto.AnimePage AnalyzeDocument(string HTMLCode)
+        private static Dto.AnimePageData AnalyzeDocument(string HTMLCode)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            Dto.AnimePage page = new Dto.AnimePage(Header.Parse(HTMLCode));
+            Dto.AnimePageData page = new Dto.AnimePageData(Header.Parse(HTMLCode));
 
             //Statistics PARSED from header, not needed.
             //Score = float.Parse(doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "fl-l score").InnerText),
@@ -71,50 +71,12 @@ namespace MALParser.Anime
                 var tableNode = doc.DocumentNode.Descendants("table").First(x => x.GetAttributeValue("class", "") == "anime_detail_related_anime");
                 foreach(var node in tableNode.Descendants("tr"))
                 {
-                    switch (Utility.Classify(node.InnerText.Replace(" ", "").Replace("-", "")))
-                    {
-                        case FieldName.Adaptation:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.Adaptation.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Sequel:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.Sequel.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Prequel:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.Prequel.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Alternativeversion:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.AlternativeVersion.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Sidestory:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.SideStory.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Spinoff:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.SpinOff.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Other:
-                        case FieldName.Otherlinks:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.OtherLinks.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Parentstory:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.ParentStory.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Summary:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.Summary.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                        case FieldName.Characters:
-                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
-                                page.Characters.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
-                            break;
-                    }
+                    string type = node.InnerText.Replace(" ", "").Replace("-", "").Split(':')[0];
+                    RelatedAnime animeType = (RelatedAnime)Enum.Parse(typeof(RelatedAnime), type);
+
+                    page.RelatedAnime.Add(animeType, new List<LinkInfo>()); //There should never be the same keys, should add check just-in-case
+                    foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
+                        page.RelatedAnime[animeType].Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                 }
             } catch (Exception ex)
             {
@@ -248,7 +210,7 @@ namespace MALParser.Anime
                     string imageLink = recommend.Descendants("img").First().GetAttributeValue("src", "");
                     page.PresentedRecommendations.Add(new Dto.RecommendationInfo()
                     {
-                        RecommendationLink = new LinkInfo(animeLink, name),
+                        RecommendationAnime = new LinkInfo(animeLink, name),
                         AnimeImageLink = new LinkInfo(imageLink),
                         RecommendedUsers = users,
                     });

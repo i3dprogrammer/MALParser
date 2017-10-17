@@ -11,7 +11,7 @@ namespace UnitTesting.Anime
         public void AnimeCharactersPage_ParsedCorrectly()
         {
             string testLink = "https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood/characters";
-            CharactersPage page = MALParser.Anime.Characters.Parse(testLink);
+            CharactersPageData page = MALParser.Anime.Characters.Parse(testLink);
             Assert.AreNotEqual(page.Characters.Count, 0);
             Assert.AreNotEqual(page.Staff.Count, 0);
 

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MALParser.Dto
 {
-    public class EpisodesPage
+    public class EpisodesPageData
     {
         public BaseAnimeInfo BaseAnimeInfo { get; set; }
 
-        public EpisodesPage(BaseAnimeInfo baseAnimeInfo)
+        public EpisodesPageData(BaseAnimeInfo baseAnimeInfo)
         {
             this.BaseAnimeInfo = baseAnimeInfo;
         }
@@ -24,7 +24,7 @@ namespace MALParser.Dto
         internal LinkInfo NextPageLink { get; set; }
         internal LinkInfo PreviousPageLink { get; set; }
 
-        public async Task<EpisodesPage> ParseNextPageAsync()
+        public async Task<EpisodesPageData> ParseNextPageAsync()
         {
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
@@ -32,7 +32,7 @@ namespace MALParser.Dto
             return await MALParser.Anime.Episodes.ParseAsync(NextPageLink.Path);
         }
 
-        public EpisodesPage ParseNextPage()
+        public EpisodesPageData ParseNextPage()
         {
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
@@ -40,7 +40,7 @@ namespace MALParser.Dto
             return MALParser.Anime.Episodes.Parse(NextPageLink.Path);
         }
 
-        public async Task<EpisodesPage> ParsePreviousPageAsync()
+        public async Task<EpisodesPageData> ParsePreviousPageAsync()
         {
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
@@ -48,7 +48,7 @@ namespace MALParser.Dto
             return await MALParser.Anime.Episodes.ParseAsync(PreviousPageLink.Path);
         }
 
-        public EpisodesPage ParsePreviousPage()
+        public EpisodesPageData ParsePreviousPage()
         {
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");

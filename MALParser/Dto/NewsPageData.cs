@@ -7,11 +7,11 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto
 {
-    public class NewsPage
+    public class NewsPageData
     {
         public BaseAnimeInfo BaseAnimeInfo { get; set; }
 
-        public NewsPage(BaseAnimeInfo baseAnimeInfo)
+        public NewsPageData(BaseAnimeInfo baseAnimeInfo)
         {
             this.BaseAnimeInfo = baseAnimeInfo;
         }

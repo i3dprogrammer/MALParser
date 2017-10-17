@@ -11,7 +11,7 @@ namespace UnitTesting.Anime
         public void AnimeDetailsPage_ParsedCorrectly()
         {
             string testLink = "https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood/";
-            AnimePage testPage = MALParser.Anime.Details.Parse(testLink);
+            AnimePageData testPage = MALParser.Anime.Details.Parse(testLink);
 
             Assert.IsNotNull(testPage.PromotionalVideo);
             Assert.IsNotNull(testPage.Description);
@@ -19,10 +19,10 @@ namespace UnitTesting.Anime
             //TODO: Parse background.
             testPage.Background = "";
             Assert.IsNotNull(testPage.Background);
-            Assert.AreEqual(testPage.Adaptation.Count, 1);
-            Assert.AreEqual(testPage.AlternativeVersion.Count, 1);
-            Assert.AreEqual(testPage.SideStory.Count, 2);
-            Assert.AreEqual(testPage.SpinOff.Count, 1);
+            Assert.AreEqual(testPage.RelatedAnime[MALParser.RelatedAnime.Adaptation].Count, 1);
+            Assert.AreEqual(testPage.RelatedAnime[MALParser.RelatedAnime.Alternativeversion].Count, 1);
+            Assert.AreEqual(testPage.RelatedAnime[MALParser.RelatedAnime.Sidestory].Count, 2);
+            Assert.AreEqual(testPage.RelatedAnime[MALParser.RelatedAnime.Spinoff].Count, 1);
 
             Assert.AreEqual(testPage.PresentedCharacters.Count, 10);
             Assert.AreEqual(testPage.PresentedStaff.Count, 4);

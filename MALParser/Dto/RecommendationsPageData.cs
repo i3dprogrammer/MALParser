@@ -7,11 +7,11 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto
 {
-    public class RecommendationsPage
+    public class RecommendationsPageData
     {
         public BaseAnimeInfo BaseAnimeInfo { get; set; }
 
-        public RecommendationsPage(BaseAnimeInfo baseAnimeInfo)
+        public RecommendationsPageData(BaseAnimeInfo baseAnimeInfo)
         {
             this.BaseAnimeInfo = baseAnimeInfo;
         }
@@ -22,7 +22,7 @@ namespace MALParser.Dto
     public class RecommendationInfo
     {
         public int RecommendedUsers { get; set; }
-        public LinkInfo RecommendationLink { get; set; }
+        public LinkInfo RecommendationAnime { get; set; }
         public LinkInfo AnimeImageLink { get; set; }
         public List<PersonDescriptionInfo> Reviews { get; set; }
     }
