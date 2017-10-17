@@ -56,4 +56,14 @@ namespace MALParser
         Characters,
         None
     }
+
+    public enum AnimeSummaryStats
+    {
+        Watching,
+        Completed,
+        OnHold,
+        Dropped,
+        PlantoWatch,
+        Total,
+    }
 }

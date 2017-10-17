@@ -13,22 +13,22 @@ namespace MALParser.Anime
     {
         private static HttpClient client = new HttpClient();
 
-        public static async Task<Dto.AnimePageData> ParseAsync(string link)
+        public static async Task<Dto.DetailsPageData> ParseAsync(string link)
         {
             return AnalyzeDocument(await client.GetStringAsync(link));
         }
 
-        public static Dto.AnimePageData Parse(string link)
+        public static Dto.DetailsPageData Parse(string link)
         {
             return AnalyzeDocument(client.GetStringAsync(link).Result);
         }
 
-        private static Dto.AnimePageData AnalyzeDocument(string HTMLCode)
+        private static Dto.DetailsPageData AnalyzeDocument(string HTMLCode)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            Dto.AnimePageData page = new Dto.AnimePageData(Header.Parse(HTMLCode));
+            Dto.DetailsPageData page = new Dto.DetailsPageData(Header.Parse(HTMLCode));
 
             //Statistics PARSED from header, not needed.
             //Score = float.Parse(doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "fl-l score").InnerText),

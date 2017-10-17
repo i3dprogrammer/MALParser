@@ -32,7 +32,22 @@ namespace MALParser.Anime
 
             try
             {
-                
+                var mainNode = doc.DocumentNode.Descendants().First(x => x.GetAttributeValue("class", "") == "js-scrollfix-bottom-rel");
+                foreach(var spaceit_pad in mainNode.ChildNodes.Where(x => x.GetAttributeValue("class", "") == "spaceit_pad"))
+                {
+                    var text = spaceit_pad.InnerText.Replace(" ", "").Replace("-", "");
+                    var summaryType = (AnimeSummaryStats)Enum.Parse(typeof(AnimeSummaryStats), text.Split(':')[0]);
+                    page.SummaryStats.Add(summaryType, Utility.GetIntFromString(text.Split(':')[1]));
+                }
+
+                mainNode = mainNode.ChildNodes.First(x => x.Name == "table");
+                foreach (var tr in mainNode.Descendants("tr"))
+                {
+                    var text = tr.Descendants("small").First().InnerText;
+                    var index = tr.Descendants("td").First().InnerText;
+                    page.ScoreStats.Add(Utility.GetIntFromString(index), Utility.GetIntFromString(text));
+                }
+
             }
             catch (Exception ex)
             {

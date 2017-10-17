@@ -16,13 +16,8 @@ namespace MALParser.Dto
             this.BaseAnimeInfo = baseAnimeInfo;
         }
 
-        public int Watching { get; set; }
-        public int Completed { get; set; }
-        public int Onhold { get; set; }
-        public int Dropped { get; set; }
-        public int PlatToWatch { get; set; }
-        public int Total { get; set; }
+        public Dictionary<AnimeSummaryStats, long> SummaryStats { get; set; } = new Dictionary<AnimeSummaryStats, long>();
 
-        Dictionary<int, long> ScoreStats { get; set; } = new Dictionary<int, long>();
+        public Dictionary<int, long> ScoreStats { get; set; } = new Dictionary<int, long>();
     }
 }
