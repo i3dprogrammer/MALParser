@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MALParser.Anime
+namespace MALParser.AnimePage
 {
     //TODO: make it internal.
     public class Utility

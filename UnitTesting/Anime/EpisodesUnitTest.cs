@@ -11,7 +11,7 @@ namespace UnitTesting.Anime
         public void AnimeEpisodesPage_ParsedCorrectly()
         {
             string testLink = "https://myanimelist.net/anime/21/One_Piece/episode";
-            EpisodesPageData page = MALParser.Anime.Episodes.Parse(testLink);
+            EpisodesPageData page = MALParser.AnimePage.Episodes.Parse(testLink);
 
             Assert.AreEqual(page.NextPageAvailable, true);
             Assert.AreEqual(page.PreviousPageAvailable, false);

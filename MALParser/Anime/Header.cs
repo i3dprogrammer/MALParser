@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MALParser.Anime
+namespace MALParser.AnimePage
 {
     public class Header
     {

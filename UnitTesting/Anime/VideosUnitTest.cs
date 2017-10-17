@@ -13,7 +13,7 @@ namespace UnitTesting.Anime
         public void AnimeVideosPage_ParsedCorrectly()
         {
             string testLink = "https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood/video";
-            VideosPageData page = MALParser.Anime.Videos.Parse(testLink);
+            VideosPageData page = MALParser.AnimePage.Videos.Parse(testLink);
 
             //TODO: Parse episodes
             page.Episodes = Enumerable.Repeat(new LinkInfo(), 64).ToList();

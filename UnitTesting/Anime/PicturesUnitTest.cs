@@ -11,7 +11,7 @@ namespace UnitTesting.Anime
         public void AnimePicturesPage_ParsedCorrectly()
         {
             string testLink = "https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood/pics";
-            PicturesPageData page = MALParser.Anime.Pictures.Parse(testLink);
+            PicturesPageData page = MALParser.AnimePage.Pictures.Parse(testLink);
 
             Assert.AreEqual(page.Pictures.Count, 8);
             page.Pictures.ForEach(x =>

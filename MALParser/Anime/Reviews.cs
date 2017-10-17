@@ -8,7 +8,7 @@ using MALParser.Dto;
 using System.Net.Http;
 using HtmlAgilityPack;
 
-namespace MALParser.Anime
+namespace MALParser.AnimePage
 {
     public class Reviews
     {

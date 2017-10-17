@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using MALParser.Dto.Utility;
 
-namespace MALParser.Anime
+namespace MALParser.AnimePage
 {
     public class Details
     {

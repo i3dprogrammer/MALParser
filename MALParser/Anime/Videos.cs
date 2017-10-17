@@ -6,7 +6,7 @@ using HtmlAgilityPack;
 using System.Linq;
 using MALParser.Dto.Utility;
 
-namespace MALParser.Anime
+namespace MALParser.AnimePage
 {
     public class Videos
     {
