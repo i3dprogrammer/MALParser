@@ -73,42 +73,46 @@ namespace MALParser.Anime
                 {
                     switch (Utility.Classify(node.InnerText.Replace(" ", "").Replace("-", "")))
                     {
-                        case Utility.FieldName.Adaptation:
+                        case FieldName.Adaptation:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.Adaptation.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Sequel:
+                        case FieldName.Sequel:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.Sequel.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Prequel:
+                        case FieldName.Prequel:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.Prequel.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Alternativeversion:
+                        case FieldName.Alternativeversion:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.AlternativeVersion.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Sidestory:
+                        case FieldName.Sidestory:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.SideStory.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Spinoff:
+                        case FieldName.Spinoff:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.SpinOff.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Other:
-                        case Utility.FieldName.Otherlinks:
+                        case FieldName.Other:
+                        case FieldName.Otherlinks:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.OtherLinks.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Parentstory:
+                        case FieldName.Parentstory:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.ParentStory.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Summary:
+                        case FieldName.Summary:
                             foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
                                 page.Summary.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
+                            break;
+                        case FieldName.Characters:
+                            foreach (var item in node.Descendants("td").ElementAt(1).Descendants("a"))
+                                page.Characters.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
                     }
                 }
@@ -201,8 +205,9 @@ namespace MALParser.Anime
                     var leftNode = review.Descendants("div").First(x => x.GetAttributeValue("class", "") == "spaceit").Descendants("tr").First();
                     reviewInfo.ImageLink = new LinkInfo(leftNode.Descendants("img").First().GetAttributeValue("src", ""));
                     var reviewerLink = new LinkInfo(leftNode.Descendants("a").First().GetAttributeValue("href", ""));
+                    reviewerLink.Name = reviewerLink.Path.Split('/').Last();
                     reviewInfo.AllReviewsByThisGuy = new LinkInfo(leftNode.Descendants("a").Last().GetAttributeValue("href", ""));
-                    reviewInfo.PeopleFoundHelpful = Utility.GetIntFromString(leftNode.Descendants("div").Last().Descendants("span").First().InnerText);
+                    reviewInfo.PeopleFoundHelpful = Utility.GetIntFromString(leftNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "lightLink spaceit").InnerText);
 
                     //Right part
                     var mb8Node = review.Descendants("div").First(x => x.GetAttributeValue("class", "") == "mb8");
@@ -221,7 +226,8 @@ namespace MALParser.Anime
                     var description = HtmlEntity.DeEntitize(descriptionNode.InnerText.Replace(descriptionNode.Descendants("div").First().InnerText, "")).Trim();
                     int error = 50;
                     description = description.Remove(description.Length - error, error);
-                    reviewInfo.Description = new PersonDescriptionInfo() { Description = description, By = reviewerLink };
+                    reviewInfo.ReviewDescription = description;
+                    reviewInfo.Reviewer = reviewerLink;
 
                     page.PresentedReviews.Add(reviewInfo);
                 }

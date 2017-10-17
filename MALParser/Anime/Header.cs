@@ -129,70 +129,70 @@ namespace MALParser.Anime
 
                     switch (classified)
                     {
-                        case Utility.FieldName.English:
+                        case FieldName.English:
                             page.EnglishTitle = val;
                             break;
-                        case Utility.FieldName.Synonyms:
+                        case FieldName.Synonyms:
                             page.SynonymsTitle = val;
                             break;
-                        case Utility.FieldName.Japanese:
+                        case FieldName.Japanese:
                             page.JapaneseTitle = val;
                             break;
-                        case Utility.FieldName.Type:
+                        case FieldName.Type:
                             page.Type = val;
                             break;
-                        case Utility.FieldName.Episodes:
+                        case FieldName.Episodes:
                             page.Episodes = val;
                             break;
-                        case Utility.FieldName.Status:
+                        case FieldName.Status:
                             page.Status = val;
                             break;
-                        case Utility.FieldName.Aired:
+                        case FieldName.Aired:
                             page.Aired = val;
                             break;
-                        case Utility.FieldName.Premiered:
+                        case FieldName.Premiered:
                             page.Premiered = val;
                             break;
-                        case Utility.FieldName.Broadcast:
+                        case FieldName.Broadcast:
                             page.Broadcast = val;
                             break;
-                        case Utility.FieldName.Producers:
+                        case FieldName.Producers:
                             foreach (var item in node.Descendants().Where(x => x.Name == "a"))
                                 page.Producers.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Licensors:
+                        case FieldName.Licensors:
                             foreach (var item in node.Descendants().Where(x => x.Name == "a"))
                                 page.Licensors.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Studios:
+                        case FieldName.Studios:
                             foreach (var item in node.Descendants().Where(x => x.Name == "a"))
                                 page.Studios.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Source:
+                        case FieldName.Source:
                             page.Source = (SourceType)Enum.Parse(typeof(SourceType), val.Replace(" ", ""));
                             break;
-                        case Utility.FieldName.Genres:
+                        case FieldName.Genres:
                             foreach (var item in node.Descendants().Where(x => x.Name == "a"))
                                 page.Genres.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
-                        case Utility.FieldName.Duration:
+                        case FieldName.Duration:
                             page.Duration = val;
                             break;
-                        case Utility.FieldName.Rating:
+                        case FieldName.Rating:
                             page.AgeRating = val;
                             break;
-                        case Utility.FieldName.Popularity:
+                        case FieldName.Popularity:
                             page.Popularity = Utility.GetIntFromString(val);
                             break;
-                        case Utility.FieldName.Members:
+                        case FieldName.Members:
                             page.Members = Utility.GetIntFromString(val);
                             break;
-                        case Utility.FieldName.Favorites:
+                        case FieldName.Favorites:
                             page.Favorites = Utility.GetIntFromString(val);
                             break;
                     }
 
-                    if (classified == Utility.FieldName.Favorites)
+                    if (classified == FieldName.Favorites || classified == FieldName.None)
                         break;
                 }
             }

@@ -32,6 +32,7 @@ namespace MALParser.Dto
         public List<LinkInfo> OtherLinks { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> ParentStory { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> Summary { get; set; } = new List<LinkInfo>();
+        public List<LinkInfo> Characters { get; set; } = new List<LinkInfo>();
 
         public List<CharacterInfo> PresentedCharacters { get; set; } = new List<CharacterInfo>();
         public List<PersonInfo> PresentedStaff { get; set; } = new List<PersonInfo>();

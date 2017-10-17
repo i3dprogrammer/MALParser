@@ -55,6 +55,8 @@
     <Compile Include="Anime\DetailsUnitTest.cs" />
     <Compile Include="Anime\PicturesUnitTest.cs" />
     <Compile Include="Anime\CharactersUnitTest.cs" />
+    <Compile Include="Anime\ReviewsUnitTest.cs" />
+    <Compile Include="Anime\EpisodesUnitTest.cs" />
     <Compile Include="Anime\VideosUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

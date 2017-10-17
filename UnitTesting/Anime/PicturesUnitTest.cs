@@ -14,6 +14,10 @@ namespace UnitTesting.Anime
             PicturesPage page = MALParser.Anime.Pictures.Parse(testLink);
 
             Assert.AreEqual(page.Pictures.Count, 8);
+            page.Pictures.ForEach(x =>
+            {
+                Assert.IsNotNull(x.Path);
+            });
         }
     }
 }
