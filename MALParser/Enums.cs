@@ -10,11 +10,17 @@ namespace MALParser
     {
         Anime,
         Manga,
-        Visualnovel,
-        Lightnovel,
+        VisualNovel,
+        LightNovel,
         Original,
         Novel,
-        Webmanga,
+        WebManga,
+        DigitalManga,
+        Game,
+        Music,
+        komaManga,
+        CardGame,
+        Other,
     }
 
     public enum FieldName
@@ -47,6 +53,7 @@ namespace MALParser
     {
         Adaptation,
         Alternativeversion,
+        Alternativesetting,
         Sidestory,
         Spinoff,
         Otherlinks,
@@ -59,7 +66,7 @@ namespace MALParser
         None
     }
 
-    public enum AnimeSummaryStats
+    public enum AnimeStatsType
     {
         Watching,
         Completed,

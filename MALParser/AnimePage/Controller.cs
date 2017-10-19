@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MALParser.Dto;
+using MALParser.Dto.AnimePageModels;
 using MALParser.Dto.Utility;
 
 namespace MALParser.AnimePage
@@ -11,7 +11,7 @@ namespace MALParser.AnimePage
     public class Controller
     {
         private string m_pageLink;
-        private BaseAnimeInfo m_header;
+        private AnimePageHeader m_header;
         private CharactersPageData m_characters;
         private DetailsPageData m_details;
         private EpisodesPageData m_episodes;
@@ -20,7 +20,7 @@ namespace MALParser.AnimePage
         private StatsPageData m_stats;
         private VideosPageData m_videos;
 
-        public BaseAnimeInfo AnimeHeader
+        public AnimePageHeader AnimeHeader
         {
             get
             {

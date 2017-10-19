@@ -5,20 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using MALParser.Dto.Utility;
 
-namespace MALParser.Dto
+namespace MALParser.Dto.AnimePageModels
 {
-    public class ReviewsPageData
+    public class ReviewsPageData : BaseAnimeInfoActor
     {
-        public BaseAnimeInfo BaseAnimeInfo { get; set; }
-
-        public ReviewsPageData(BaseAnimeInfo baseAnimeInfo)
-        {
-            this.BaseAnimeInfo = baseAnimeInfo;
-        }
+        public ReviewsPageData(AnimePageHeader baseAnimeInfo) : base(baseAnimeInfo) { }
 
         public List<ReviewInfo> Reviews { get; set; } = new List<ReviewInfo>();
-
-        //public int PageNumber { get; set; } = -1;
 
         public bool NextPageAvailable { get { return NextPageLink != null; } }
         public bool PreviousPageAvailable { get { return PreviousPageLink != null; } }
@@ -31,7 +24,7 @@ namespace MALParser.Dto
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return await MALParser.AnimePage.Reviews.ParseAsync(NextPageLink.Path);
+            return await AnimePage.Reviews.ParseAsync(NextPageLink.Path);
         }
 
         public ReviewsPageData ParseNextPage()
@@ -39,7 +32,7 @@ namespace MALParser.Dto
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return MALParser.AnimePage.Reviews.Parse(NextPageLink.Path);
+            return AnimePage.Reviews.Parse(NextPageLink.Path);
         }
 
         public async Task<ReviewsPageData> ParsePreviousPageAsync()
@@ -47,7 +40,7 @@ namespace MALParser.Dto
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return await MALParser.AnimePage.Reviews.ParseAsync(PreviousPageLink.Path);
+            return await AnimePage.Reviews.ParseAsync(PreviousPageLink.Path);
         }
 
         public ReviewsPageData ParsePreviousPage()
@@ -55,7 +48,7 @@ namespace MALParser.Dto
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return MALParser.AnimePage.Reviews.Parse(PreviousPageLink.Path);
+            return AnimePage.Reviews.Parse(PreviousPageLink.Path);
         }
     }
 

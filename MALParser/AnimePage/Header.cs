@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using MALParser.Dto.AnimePageModels;
 using MALParser.Dto.Utility;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,26 @@ using System.Threading.Tasks;
 
 namespace MALParser.AnimePage
 {
-    internal class Header
+    internal static class Header
     {
         private static HttpClient client = new HttpClient();
 
-        public static async Task<BaseAnimeInfo> ParseAsync(string link)
+        public static async Task<AnimePageHeader> ParseAsync(string link)
         {
             return AnalyzeHeader(await client.GetStringAsync(link));
         }
 
-        public static BaseAnimeInfo Parse(string link)
+        public static AnimePageHeader Parse(string link)
         {
             return AnalyzeHeader(client.GetStringAsync(link).Result);
         }
 
-        public static BaseAnimeInfo AnalyzeHeader(string HTMLCode)
+        public static AnimePageHeader AnalyzeHeader(string HTMLCode)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            var page = new BaseAnimeInfo();
+            var page = new AnimePageHeader();
 
             //Parse links
             try
@@ -142,7 +143,7 @@ namespace MALParser.AnimePage
                     else
                         val = str.Split(':').Skip(1).Aggregate((x, y) => x + ":" + y).Trim();
 
-                    var classified = Utility.Classify(str);
+                    var classified = Utility.ClassifyFieldName(str);
 
                     switch (classified)
                     {
@@ -186,11 +187,11 @@ namespace MALParser.AnimePage
                                 page.Studios.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
                         case FieldName.Source:
-                            page.Source = (SourceType)Enum.Parse(typeof(SourceType), val.Replace(" ", ""));
+                            page.Source = (SourceType)Enum.Parse(typeof(SourceType), Utility.FixEnum(val));
                             break;
                         case FieldName.Genres:
                             foreach (var item in node.Descendants().Where(x => x.Name == "a"))
-                                page.Genres.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
+                                page.Genres.Add(HtmlEntity.DeEntitize(item.InnerText));
                             break;
                         case FieldName.Duration:
                             page.Duration = val;

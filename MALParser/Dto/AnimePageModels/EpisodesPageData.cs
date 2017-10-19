@@ -5,16 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MALParser.Dto
+namespace MALParser.Dto.AnimePageModels
 {
-    public class EpisodesPageData
+    public class EpisodesPageData : BaseAnimeInfoActor
     {
-        public BaseAnimeInfo BaseAnimeInfo { get; set; }
-
-        public EpisodesPageData(BaseAnimeInfo baseAnimeInfo)
-        {
-            this.BaseAnimeInfo = baseAnimeInfo;
-        }
+        public EpisodesPageData(AnimePageHeader baseAnimeInfo) : base(baseAnimeInfo) { }
 
         public List<EpisodeInfo> Episodes { get; set; } = new List<EpisodeInfo>();
 
@@ -29,7 +24,7 @@ namespace MALParser.Dto
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return await MALParser.AnimePage.Episodes.ParseAsync(NextPageLink.Path);
+            return await AnimePage.Episodes.ParseAsync(NextPageLink.Path);
         }
 
         public EpisodesPageData ParseNextPage()
@@ -37,7 +32,7 @@ namespace MALParser.Dto
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return MALParser.AnimePage.Episodes.Parse(NextPageLink.Path);
+            return AnimePage.Episodes.Parse(NextPageLink.Path);
         }
 
         public async Task<EpisodesPageData> ParsePreviousPageAsync()
@@ -45,7 +40,7 @@ namespace MALParser.Dto
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return await MALParser.AnimePage.Episodes.ParseAsync(PreviousPageLink.Path);
+            return await AnimePage.Episodes.ParseAsync(PreviousPageLink.Path);
         }
 
         public EpisodesPageData ParsePreviousPage()
@@ -53,7 +48,7 @@ namespace MALParser.Dto
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return MALParser.AnimePage.Episodes.Parse(PreviousPageLink.Path);
+            return AnimePage.Episodes.Parse(PreviousPageLink.Path);
         }
     }
 

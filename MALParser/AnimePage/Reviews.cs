@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MALParser.Dto.Utility;
-using MALParser.Dto;
+using MALParser.Dto.AnimePageModels;
 using System.Net.Http;
 using HtmlAgilityPack;
 
 namespace MALParser.AnimePage
 {
-    public class Reviews
+    public static class Reviews
     {
         private static HttpClient client = new HttpClient();
 

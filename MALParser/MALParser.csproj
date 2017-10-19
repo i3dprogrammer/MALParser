@@ -52,26 +52,29 @@
     <Compile Include="AnimePage\Pictures.cs" />
     <Compile Include="AnimePage\Reviews.cs" />
     <Compile Include="AnimePage\Stats.cs" />
-    <Compile Include="AnimePage\Utility.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="AnimePage\Videos.cs" />
-    <Compile Include="Dto\DetailsPageData.cs" />
-    <Compile Include="Dto\EpisodesPageData.cs" />
-    <Compile Include="Dto\PicturesPageData.cs" />
-    <Compile Include="Dto\Utility\BaseAnimeInfo.cs" />
-    <Compile Include="Dto\NewsPageData.cs" />
-    <Compile Include="Dto\Utility\PersonDescriptionInfo.cs" />
-    <Compile Include="Dto\CharactersPageData.cs" />
+    <Compile Include="Dto\AnimePageModels\AnimePageHeader.cs" />
+    <Compile Include="Dto\AnimePageModels\DetailsPageData.cs" />
+    <Compile Include="Dto\AnimePageModels\EpisodesPageData.cs" />
+    <Compile Include="Dto\Utility\BaseAnimeInfoActor.cs" />
+    <Compile Include="Dto\AnimePageModels\PicturesPageData.cs" />
+    <Compile Include="Dto\BaseAnimeInfo.cs" />
+    <Compile Include="Dto\AnimePageModels\NewsPageData.cs" />
+    <Compile Include="Dto\AnimePageModels\CharactersPageData.cs" />
     <Compile Include="Dto\Utility\LinkInfo.cs" />
-    <Compile Include="Dto\RecommendationsPageData.cs" />
-    <Compile Include="Dto\ReviewsPageData.cs" />
-    <Compile Include="Dto\StatsPageData.cs" />
-    <Compile Include="Dto\VideosPageData.cs" />
+    <Compile Include="Dto\AnimePageModels\RecommendationsPageData.cs" />
+    <Compile Include="Dto\AnimePageModels\ReviewsPageData.cs" />
+    <Compile Include="Dto\AnimePageModels\StatsPageData.cs" />
+    <Compile Include="Dto\AnimePageModels\VideosPageData.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ParserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeasonalAnime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

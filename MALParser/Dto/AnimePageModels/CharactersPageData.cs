@@ -5,16 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MALParser.Dto.Utility;
 
-namespace MALParser.Dto
+namespace MALParser.Dto.AnimePageModels
 {
-    public class CharactersPageData
+    public class CharactersPageData : BaseAnimeInfoActor
     {
-        public BaseAnimeInfo BaseAnimeInfo { get; set; }
-
-        public CharactersPageData(BaseAnimeInfo baseAnimeInfo)
-        {
-            this.BaseAnimeInfo = baseAnimeInfo;
-        }
+        public CharactersPageData(AnimePageHeader baseAnimeInfo) : base(baseAnimeInfo) {}
 
         public List<CharacterInfo> Characters { get; set; } = new List<CharacterInfo>();
         public List<PersonInfo> Staff { get; set; } = new List<PersonInfo>();

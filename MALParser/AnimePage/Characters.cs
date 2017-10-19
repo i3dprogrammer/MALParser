@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using MALParser.Dto;
+using MALParser.Dto.AnimePageModels;
 using MALParser.Dto.Utility;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MALParser.AnimePage
 {
-    public class Characters
+    public static class Characters
     {
         private static HttpClient client = new HttpClient();
 
@@ -70,7 +70,7 @@ namespace MALParser.AnimePage
                 var staffNode = doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "js-scrollfix-bottom-rel");
                 foreach (var table in staffNode.ChildNodes.Where(x => x.Name == "table" && x.Descendants("td").Count() == 2))
                 {
-                    Dto.PersonInfo person = new Dto.PersonInfo();
+                    Dto.AnimePageModels.PersonInfo person = new Dto.AnimePageModels.PersonInfo();
                     person.ImageLink = new LinkInfo(table.Descendants("img").First().GetAttributeValue("src", ""));
                     person.Name = table.Descendants("td").ElementAt(1).Descendants("a").First().InnerText.Trim();
                     person.Link = new LinkInfo(table.Descendants("td").ElementAt(1).Descendants("a").First().GetAttributeValue("href", ""), person.Name);

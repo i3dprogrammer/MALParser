@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using MALParser.Dto;
+using MALParser.Dto.AnimePageModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MALParser.AnimePage
 {
-    public class Stats
+    public static class Stats
     {
         private static HttpClient client = new HttpClient();
 
@@ -36,7 +36,7 @@ namespace MALParser.AnimePage
                 foreach(var spaceit_pad in mainNode.ChildNodes.Where(x => x.GetAttributeValue("class", "") == "spaceit_pad"))
                 {
                     var text = spaceit_pad.InnerText.Replace(" ", "").Replace("-", "");
-                    var summaryType = (AnimeSummaryStats)Enum.Parse(typeof(AnimeSummaryStats), text.Split(':')[0]);
+                    var summaryType = (AnimeStatsType)Enum.Parse(typeof(AnimeStatsType), text.Split(':')[0]);
                     page.SummaryStats.Add(summaryType, Utility.GetIntFromString(text.Split(':')[1]));
                 }
 

@@ -9,26 +9,26 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.AnimePage
 {
-    public class Details
+    public static class Details
     {
         private static HttpClient client = new HttpClient();
 
-        public static async Task<Dto.DetailsPageData> ParseAsync(string link)
+        public static async Task<Dto.AnimePageModels.DetailsPageData> ParseAsync(string link)
         {
             return AnalyzeDocument(await client.GetStringAsync(link));
         }
 
-        public static Dto.DetailsPageData Parse(string link)
+        public static Dto.AnimePageModels.DetailsPageData Parse(string link)
         {
             return AnalyzeDocument(client.GetStringAsync(link).Result);
         }
 
-        private static Dto.DetailsPageData AnalyzeDocument(string HTMLCode)
+        private static Dto.AnimePageModels.DetailsPageData AnalyzeDocument(string HTMLCode)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(HTMLCode);
 
-            Dto.DetailsPageData page = new Dto.DetailsPageData(Header.AnalyzeHeader(HTMLCode));
+            Dto.AnimePageModels.DetailsPageData page = new Dto.AnimePageModels.DetailsPageData(Header.AnalyzeHeader(HTMLCode));
 
             //Statistics PARSED from header, not needed.
             //Score = float.Parse(doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "fl-l score").InnerText),
@@ -92,7 +92,7 @@ namespace MALParser.AnimePage
                     foreach (var table in div.ChildNodes.Where(x => x.Name == "table"))
                     {
                         //Left part
-                        Dto.CharacterInfo charInfo = new Dto.CharacterInfo();
+                        Dto.AnimePageModels.CharacterInfo charInfo = new Dto.AnimePageModels.CharacterInfo();
                         var charLink = table.Descendants("td").ElementAt(1).Descendants("a").First().GetAttributeValue("href", "");
                         charInfo.CharacterName = table.Descendants("td").ElementAt(1).Descendants("a").First().InnerText.Trim();
                         charInfo.CharacterLink = new LinkInfo(charLink, charInfo.CharacterName);
@@ -100,10 +100,10 @@ namespace MALParser.AnimePage
                         charInfo.ImageLink = new LinkInfo(table.Descendants("img").First().GetAttributeValue("src", ""));
 
                         //Right part
-                        charInfo.VoiceOvers = new List<Dto.PersonInfo>();
+                        charInfo.VoiceOvers = new List<Dto.AnimePageModels.PersonInfo>();
                         foreach(var vo in table.Descendants("tr").First().ChildNodes.Where(x => x.Name == "td").Last().Descendants("tr"))
                         {
-                            var person = new Dto.PersonInfo();
+                            var person = new Dto.AnimePageModels.PersonInfo();
                             person.Name = vo.Descendants("td").First().Descendants("a").First().InnerText.Trim();
                             person.Link = new LinkInfo(vo.Descendants("td").First().Descendants("a").First().GetAttributeValue("href", ""), person.Name);
                             person.Role = vo.Descendants("td").First().Descendants("small").First().InnerText.Trim();
@@ -124,7 +124,7 @@ namespace MALParser.AnimePage
                 var staffNode = doc.DocumentNode.Descendants("div").Last(x => x.GetAttributeValue("class", "") == "detail-characters-list clearfix");
                 foreach(var table in staffNode.Descendants("table"))
                 {
-                    Dto.PersonInfo person = new Dto.PersonInfo();
+                    Dto.AnimePageModels.PersonInfo person = new Dto.AnimePageModels.PersonInfo();
                     person.ImageLink = new LinkInfo(table.Descendants("img").First().GetAttributeValue("src", ""));
                     person.Name = table.Descendants("td").ElementAt(1).Descendants("a").First().InnerText.Trim();
                     person.Link = new LinkInfo(table.Descendants("td").ElementAt(1).Descendants("a").First().GetAttributeValue("href", ""), person.Name);
@@ -162,7 +162,7 @@ namespace MALParser.AnimePage
                 var reviewNodes = doc.DocumentNode.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "borderDark");
                 foreach(var review in reviewNodes)
                 {
-                    Dto.ReviewInfo reviewInfo = new Dto.ReviewInfo();
+                    Dto.AnimePageModels.ReviewInfo reviewInfo = new Dto.AnimePageModels.ReviewInfo();
                     //Left part
                     var leftNode = review.Descendants("div").First(x => x.GetAttributeValue("class", "") == "spaceit").Descendants("tr").First();
                     reviewInfo.ImageLink = new LinkInfo(leftNode.Descendants("img").First().GetAttributeValue("src", ""));
@@ -208,7 +208,7 @@ namespace MALParser.AnimePage
                     int users = Utility.GetIntFromString(recommend.Descendants("span").First(x => x.GetAttributeValue("class", "") == "users").InnerText);
                     string animeLink = recommend.Descendants("a").First().GetAttributeValue("href", "");
                     string imageLink = recommend.Descendants("img").First().GetAttributeValue("src", "");
-                    page.PresentedRecommendations.Add(new Dto.RecommendationInfo()
+                    page.PresentedRecommendations.Add(new Dto.AnimePageModels.RecommendationInfo()
                     {
                         RecommendationAnime = new LinkInfo(animeLink, name),
                         AnimeImageLink = new LinkInfo(imageLink),

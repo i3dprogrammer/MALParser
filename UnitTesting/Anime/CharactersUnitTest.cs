@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MALParser.Dto;
+using MALParser.Dto.AnimePageModels;
 
 namespace UnitTesting.Anime
 {

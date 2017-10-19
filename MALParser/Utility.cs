@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MALParser.AnimePage
+namespace MALParser
 {
-    //TODO: make it internal.
     internal class Utility
     {
         internal static int GetIntFromString(string text)
         {
             int number = 0;
-            for(int i = 0; i < text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (char.IsDigit(text[i]))
                 {
@@ -24,7 +23,7 @@ namespace MALParser.AnimePage
             return number;
         }
 
-        internal static FieldName Classify(string text)
+        internal static FieldName ClassifyFieldName(string text)
         {
             if (!text.Contains(":"))
                 return FieldName.None;
@@ -44,6 +43,24 @@ namespace MALParser.AnimePage
             {
                 return ""; //Should get the main link in here, and return the extra, but w/e
             }
-        } 
+        }
+
+        internal static string FixEnum(string text)
+        {
+            if (text.Contains(" "))
+            {
+                int captIndex = text.IndexOf(' ') + 1;
+                StringBuilder builder = new StringBuilder(text);
+                builder[captIndex] = (char)((builder[captIndex] - 'a') + 'A');
+                text = builder.ToString();
+            }
+            Console.WriteLine(text);
+            return new String(text.Where(char.IsLetter).ToArray());
+        }
+
+        internal static string FixString(string text)
+        {
+            return text.Replace("\n", "").Trim();
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using MALParser.Dto;
+using MALParser.Dto.AnimePageModels;
 using MALParser.Dto.Utility;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MALParser.AnimePage
 {
-    public class Pictures
+    public static class Pictures
     {
         private static HttpClient client = new HttpClient();
 

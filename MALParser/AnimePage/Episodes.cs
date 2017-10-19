@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using MALParser.Dto;
+using MALParser.Dto.AnimePageModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MALParser.AnimePage
 {
-    public class Episodes
+    public static class Episodes
     {
         private static HttpClient client = new HttpClient();
 
