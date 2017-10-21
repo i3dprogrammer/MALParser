@@ -115,6 +115,9 @@ namespace MALParser.AnimePage
             if (m_characters != null)
                 return m_characters;
 
+            if (m_header.Link_CharactersAndStaff == null)
+                throw new Exception("There's no characters & staff page for this anime.");
+
             m_characters = await Characters.ParseAsync(m_header.Link_CharactersAndStaff.Path);
             return m_characters;
         }
@@ -124,6 +127,9 @@ namespace MALParser.AnimePage
             if (m_characters != null)
                 return m_characters;
 
+            if (m_header.Link_CharactersAndStaff == null)
+                throw new Exception("There's no characters & staff page for this anime.");
+
             m_characters = Characters.Parse(m_header.Link_CharactersAndStaff.Path);
             return m_characters;
         }
@@ -132,6 +138,10 @@ namespace MALParser.AnimePage
         {
             if (m_details != null)
                 return m_details;
+
+            if (m_header.Link_Details == null)
+                throw new Exception("There's no details page for this anime.");
+
             m_details = await Details.ParseAsync(m_header.Link_Details.Path);
             return m_details;
         }
@@ -140,6 +150,10 @@ namespace MALParser.AnimePage
         {
             if (m_details != null)
                 return m_details;
+
+            if (m_header.Link_Details == null)
+                throw new Exception("There's no details page for this anime.");
+
             m_details = Details.Parse(m_header.Link_Details.Path);
             return m_details;
         }
@@ -148,6 +162,10 @@ namespace MALParser.AnimePage
         {
             if (m_episodes != null)
                 return m_episodes;
+
+            if (m_header.Episodes == null)
+                throw new Exception("There's no episodes page for this anime.");
+
             m_episodes = await Episodes.ParseAsync(m_header.Link_Episodes.Path);
             return m_episodes;
         }
@@ -156,6 +174,10 @@ namespace MALParser.AnimePage
         {
             if (m_episodes != null)
                 return m_episodes;
+
+            if (m_header.Episodes == null)
+                throw new Exception("There's no episodes page for this anime.");
+
             m_episodes = Episodes.Parse(m_header.Link_Episodes.Path);
             return m_episodes;
         }
@@ -164,6 +186,10 @@ namespace MALParser.AnimePage
         {
             if (m_pictures != null)
                 return m_pictures;
+
+            if (m_header.Link_Pictures == null)
+                throw new Exception("There's no pictures page for this anime.");
+
             m_pictures = await Pictures.ParseAsync(m_header.Link_Pictures.Path);
             return m_pictures;
         }
@@ -172,6 +198,10 @@ namespace MALParser.AnimePage
         {
             if (m_pictures != null)
                 return m_pictures;
+
+            if (m_header.Link_Pictures == null)
+                throw new Exception("There's no pictures page for this anime.");
+
             m_pictures = Pictures.Parse(m_header.Link_Pictures.Path);
             return m_pictures;
         }
@@ -180,6 +210,10 @@ namespace MALParser.AnimePage
         {
             if (m_reviews != null)
                 return m_reviews;
+
+            if (m_header.Link_Reviews == null)
+                throw new Exception("There's no reviews page for this anime.");
+
             m_reviews = await Reviews.ParseAsync(m_header.Link_Reviews.Path);
             return m_reviews;
         }
@@ -188,6 +222,10 @@ namespace MALParser.AnimePage
         {
             if (m_reviews != null)
                 return m_reviews;
+
+            if (m_header.Link_Reviews == null)
+                throw new Exception("There's no reviews page for this anime.");
+
             m_reviews = Reviews.Parse(m_header.Link_Reviews.Path);
             return m_reviews;
         }
@@ -196,6 +234,10 @@ namespace MALParser.AnimePage
         {
             if (m_stats != null)
                 return m_stats;
+
+            if (m_header.Link_Stats == null)
+                throw new Exception("There's no stats page for this anime.");
+
             m_stats = await Stats.ParseAsync(m_header.Link_Stats.Path);
             return m_stats;
         }
@@ -204,6 +246,10 @@ namespace MALParser.AnimePage
         {
             if (m_stats != null)
                 return m_stats;
+
+            if (m_header.Link_Stats == null)
+                throw new Exception("There's no stats page for this anime.");
+
             m_stats = Stats.Parse(m_header.Link_Stats.Path); ;
             return m_stats;
         }
@@ -212,6 +258,10 @@ namespace MALParser.AnimePage
         {
             if (m_videos != null)
                 return m_videos;
+
+            if (m_header.Link_Videos == null)
+                throw new Exception("There's no videos page for this anime.");
+
             m_videos = await Videos.ParseAsync(m_header.Link_Videos.Path);
             return m_videos;
         }
@@ -220,6 +270,10 @@ namespace MALParser.AnimePage
         {
             if (m_videos != null)
                 return m_videos;
+
+            if (m_header.Link_Videos == null)
+                throw new Exception("There's no videos page for this anime.");
+
             m_videos = Videos.Parse(m_header.Link_Videos.Path);
             return m_videos;
         }

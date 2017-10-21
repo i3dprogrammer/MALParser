@@ -23,7 +23,7 @@ namespace MALParser.Dto.AnimePageModels
         public List<PersonInfo> PresentedStaff { get; set; } = new List<PersonInfo>();
         public List<CharacterInfo> PresentedCharacters { get; set; } = new List<CharacterInfo>();
         public List<RecommendationInfo> PresentedRecommendations { get; set; } = new List<RecommendationInfo>();
-        public Dictionary<RelatedAnime, List<LinkInfo>> RelatedAnime { get; set; } = new Dictionary<MALParser.RelatedAnime, List<LinkInfo>>();
+        public Dictionary<RelatedAnime, List<LinkInfo>> RelatedAnime { get; set; } = new Dictionary<RelatedAnime, List<LinkInfo>>();
 
     }
 }

@@ -54,7 +54,6 @@ namespace MALParser
                 builder[captIndex] = (char)((builder[captIndex] - 'a') + 'A');
                 text = builder.ToString();
             }
-            Console.WriteLine(text);
             return new String(text.Where(char.IsLetter).ToArray());
         }
 

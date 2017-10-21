@@ -20,6 +20,9 @@ namespace MALParser
         Music,
         komaManga,
         CardGame,
+        Book,
+        PictureBook,
+        Radio,
         Other,
     }
 
@@ -74,5 +77,14 @@ namespace MALParser
         Dropped,
         PlantoWatch,
         Total,
+    }
+
+    public enum Season
+    {
+        Winter,
+        Spring,
+        Summer,
+        Fall,
+        Other,
     }
 }

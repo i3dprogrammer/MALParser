@@ -52,6 +52,10 @@
     <Compile Include="AnimePage\Pictures.cs" />
     <Compile Include="AnimePage\Reviews.cs" />
     <Compile Include="AnimePage\Stats.cs" />
+    <Compile Include="Dto\AnimeListData.cs" />
+    <Compile Include="Dto\CoreAnimeEntry.cs" />
+    <Compile Include="Dto\SearchListData.cs" />
+    <Compile Include="Search.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="AnimePage\Videos.cs" />
     <Compile Include="Dto\AnimePageModels\AnimePageHeader.cs" />
@@ -59,7 +63,7 @@
     <Compile Include="Dto\AnimePageModels\EpisodesPageData.cs" />
     <Compile Include="Dto\Utility\BaseAnimeInfoActor.cs" />
     <Compile Include="Dto\AnimePageModels\PicturesPageData.cs" />
-    <Compile Include="Dto\BaseAnimeInfo.cs" />
+    <Compile Include="Dto\BaseAnimeEntry.cs" />
     <Compile Include="Dto\AnimePageModels\NewsPageData.cs" />
     <Compile Include="Dto\AnimePageModels\CharactersPageData.cs" />
     <Compile Include="Dto\Utility\LinkInfo.cs" />
@@ -70,7 +74,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="ParserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeasonalAnime.cs" />
+    <Compile Include="AnimeEntries.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -65,7 +65,11 @@ namespace MALParser.AnimePage
                     int minOffset = Utility.GetIntFromString(links.First().GetAttributeValue("href", "").Split('=').Last());
                     int maxOffset = Utility.GetIntFromString(links.Last().GetAttributeValue("href", "").Split('=').Last());
 
-                    string newLink = link.Split('/').Take(link.Split('/').Length - 1).Aggregate((x, y) => x + "/" + y) + "/episode?offset=";
+                    string newLink = "";
+                    if (link.Contains("?offset="))
+                        newLink = link.Split('=')[0] + "=";
+                    else
+                        newLink = link + "?offset=";
                     
                     if (currOffset > minOffset)
                         page.PreviousPageLink = new Dto.Utility.LinkInfo(newLink + (currOffset-100));

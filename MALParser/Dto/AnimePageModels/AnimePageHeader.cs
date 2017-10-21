@@ -7,7 +7,7 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto.AnimePageModels
 {
-    public class AnimePageHeader : BaseAnimeInfo
+    public class AnimePageHeader : BaseAnimeEntry
     {
         public LinkInfo Link_Details { get; set; }
         public LinkInfo Link_Videos { get; set; }
@@ -23,14 +23,17 @@ namespace MALParser.Dto.AnimePageModels
         public LinkInfo Link_Pictures { get; set; }
         public LinkInfo Link_MoreInfo { get; set; }
 
+        public string EnglishTitle { get; set; }
         public string SynonymsTitle { get; set; }
         public string JapaneseTitle { get; set; }
 
-        public string Duration { get; set; }
-        public string AgeRating { get; set; }
+        public string Premiered { get; set; }
 
         public List<LinkInfo> Producers { get; set; } = new List<LinkInfo>();
         public List<LinkInfo> Licensors { get; set; } = new List<LinkInfo>();
+
+        public string Duration { get; set; }
+        public string AgeRating { get; set; }
 
         public int UsersVoted { get; set; } = -1;
         public int Ranked { get; set; } = -1;
