@@ -18,7 +18,7 @@ namespace MALParser.Dto
 
         //Usually only 1 studio, yet to find a link with two
         public List<LinkInfo> Studios { get; set; } = new List<LinkInfo>();
-        public SourceType Source { get; set; }
+        public AnimeSourceType Source { get; set; }
         public List<string> Genres { get; set; } = new List<string>();
 
         public override string ToString()

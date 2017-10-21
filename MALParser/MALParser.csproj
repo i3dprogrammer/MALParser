@@ -55,7 +55,8 @@
     <Compile Include="Dto\AnimeListData.cs" />
     <Compile Include="Dto\CoreAnimeEntry.cs" />
     <Compile Include="Dto\SearchListData.cs" />
-    <Compile Include="Search.cs" />
+    <Compile Include="AnimeSearchManager.cs" />
+    <Compile Include="SearchParser.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="AnimePage\Videos.cs" />
     <Compile Include="Dto\AnimePageModels\AnimePageHeader.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Dto\AnimePageModels\StatsPageData.cs" />
     <Compile Include="Dto\AnimePageModels\VideosPageData.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="ParserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AnimeEntries.cs" />
   </ItemGroup>

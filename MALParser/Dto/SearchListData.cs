@@ -23,7 +23,7 @@ namespace MALParser.Dto
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return await Search.ParseAsync(NextPageLink.Path);
+            return await SearchParser.ParseAsync(NextPageLink.Path);
         }
 
         public SearchListData ParseNextPage()
@@ -31,7 +31,7 @@ namespace MALParser.Dto
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return Search.Parse(NextPageLink.Path);
+            return SearchParser.Parse(NextPageLink.Path);
         }
 
         public async Task<SearchListData> ParsePreviousPageAsync()
@@ -39,7 +39,7 @@ namespace MALParser.Dto
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return await Search.ParseAsync(NextPageLink.Path);
+            return await SearchParser.ParseAsync(NextPageLink.Path);
         }
 
         public SearchListData ParsePreviousPage()
@@ -47,7 +47,7 @@ namespace MALParser.Dto
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return Search.Parse(NextPageLink.Path);
+            return SearchParser.Parse(NextPageLink.Path);
         }
     }
 }

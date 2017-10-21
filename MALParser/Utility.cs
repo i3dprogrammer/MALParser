@@ -59,7 +59,7 @@ namespace MALParser
 
         internal static string FixString(string text)
         {
-            return text.Replace("\n", "").Trim();
+            return text.Replace("\n", "").Replace("\r", "").Trim();
         }
     }
 }

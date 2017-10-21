@@ -111,8 +111,7 @@ namespace MALParser.AnimePage
             try
             {
                 page.UsersVoted = Utility.GetIntFromString(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingCount").InnerText);
-                float score;
-                float.TryParse(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingValue").InnerText, out score);
+                float.TryParse(doc.DocumentNode.Descendants("span").First(x => x.GetAttributeValue("itemprop", "") == "ratingValue").InnerText, out float score);
                 page.Score = score;
             }
             catch (Exception ex)
@@ -187,7 +186,7 @@ namespace MALParser.AnimePage
                                 page.Studios.Add(new LinkInfo(item.Attributes["href"].Value, HtmlEntity.DeEntitize(item.InnerText)));
                             break;
                         case FieldName.Source:
-                            page.Source = (SourceType)Enum.Parse(typeof(SourceType), Utility.FixEnum(val));
+                            page.Source = (AnimeSourceType)Enum.Parse(typeof(AnimeSourceType), Utility.FixEnum(val));
                             break;
                         case FieldName.Genres:
                             foreach (var item in node.Descendants().Where(x => x.Name == "a"))
