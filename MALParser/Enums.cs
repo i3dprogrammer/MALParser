@@ -6,6 +6,19 @@ using System.Threading.Tasks;
 
 namespace MALParser
 {
+    public enum ScheduleDay
+    {
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Unknown,
+        Any,
+    }
+
     public enum AnimeType
     {
         Any,
@@ -118,7 +131,7 @@ namespace MALParser
         Other,
     }
 
-    public enum EntryGenre
+    public enum Genres
     {
         _Action = 1,
         _Adventure = 2,

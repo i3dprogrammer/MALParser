@@ -52,6 +52,7 @@ namespace MALParser
                     list.Animes.Add(info);
                 }
 
+                //TODO: Fix Pages
                 if (doc.DocumentNode.Descendants().Any(x => x.GetAttributeValue("class", "") == "ac mt8"))
                 {
                     int currOffset = 0;

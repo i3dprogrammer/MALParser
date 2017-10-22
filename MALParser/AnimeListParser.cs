@@ -11,23 +11,10 @@ using System.Threading.Tasks;
 
 namespace MALParser
 {
-    public static class AnimeEntries
+    public static class AnimeListParser
     {
         private static HttpClient client = new HttpClient();
-        private const string malLink = "https://myanimelist.net/anime/season/{0}/{1}";
-
-
-        //Should move to a controller.
-        public static async Task<AnimeListData> GetSeasonListAsync(int year, Season season)
-        {
-            return await ParseAsync(string.Format(malLink, year, season.ToString().ToLower()));
-        }
-
-        //Should move to a controller.
-        public static AnimeListData GetSeasonList(int year, Season season)
-        {
-            return Parse(string.Format(malLink, year, season.ToString().ToLower()));
-        }
+       
 
         public static async Task<AnimeListData> ParseAsync(string link)
         {
