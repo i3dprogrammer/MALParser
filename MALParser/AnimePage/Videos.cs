@@ -8,7 +8,7 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.AnimePage
 {
-    public static class Videos
+    internal static class Videos
     {
         private static HttpClient client = new HttpClient();
 

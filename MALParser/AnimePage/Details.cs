@@ -9,7 +9,7 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.AnimePage
 {
-    public static class Details
+    internal static class Details
     {
         private static HttpClient client = new HttpClient();
 

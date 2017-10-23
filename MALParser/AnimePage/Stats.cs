@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MALParser.AnimePage
 {
-    public static class Stats
+    internal static class Stats
     {
         private static HttpClient client = new HttpClient();
 

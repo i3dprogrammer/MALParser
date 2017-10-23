@@ -10,7 +10,7 @@ using HtmlAgilityPack;
 
 namespace MALParser.AnimePage
 {
-    public static class Reviews
+    internal static class Reviews
     {
         private static HttpClient client = new HttpClient();
 

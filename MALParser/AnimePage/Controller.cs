@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MALParser.Dto.AnimePageModels;
 using MALParser.Dto.Utility;
+using MALParser.Dto;
 
 namespace MALParser.AnimePage
 {
@@ -20,94 +21,35 @@ namespace MALParser.AnimePage
         private StatsPageData m_stats;
         private VideosPageData m_videos;
 
-        public AnimePageHeader AnimeHeader
+        public AnimePageHeader GetAnimeHeader
         {
             get
             {
                 if (m_header != null)
                     return m_header;
-                throw new Exception("Cannot return anime header because it does not exist. (Somwhow)");
+                throw new Exception("Cannot return anime header because it does not exist. (Somehow)");
             }
         }
 
-        public CharactersPageData CharactersPage
+        public Controller(int animeId)
         {
-            get
-            {
-                if (m_characters != null)
-                    return m_characters;
-                else
-                    return GetCharactersPage();
-            }
-        }
-        public DetailsPageData DetailsPage
-        {
-            get
-            {
-                if (m_details != null)
-                    return m_details;
-                else
-                    return GetDetailsPage();
-            }
-        }
-        public EpisodesPageData EpisodesPage
-        {
-            get
-            {
-                if (m_episodes != null)
-                    return m_episodes;
-                else
-                    return GetEpisodesPage();
-            }
-        }
-        public PicturesPageData PicturesPage
-        {
-            get
-            {
-                if (m_pictures != null)
-                    return m_pictures;
-                else
-                    return GetPicturesPage();
-            }
-        }
-        public ReviewsPageData ReviewsPage
-        {
-            get
-            {
-                if (m_reviews != null)
-                    return m_reviews;
-                else
-                    return GetReviewsPage();
-            }
-        }
-        public StatsPageData StatsPage
-        {
-            get
-            {
-                if (m_stats != null)
-                    return m_stats;
-                else
-                    return GetStatsPage();
-            }
-        }
-        public VideosPageData VideosPage
-        {
-            get
-            {
-                if (m_videos != null)
-                    return m_videos;
-                else
-                    return GetVideosPage();
-            }
+            //TODO: Get link from anime id
+            //m_pageLink = animePageLink;
         }
 
-        public Controller(string animePageLink)
+        public Controller(CoreAnimeEntry entry)
         {
-            m_pageLink = animePageLink;
+            m_header = Header.Parse(entry.AnimeLink.Path);
+        }
 
-            //No idea how to do that async currently.
-            //TODO: do this async also
-            m_header = Header.Parse(animePageLink);
+        public async void InitializeAsync()
+        {
+            m_header = await Header.ParseAsync(m_pageLink);
+        }
+
+        public void Initialize()
+        {
+            m_header = Header.Parse(m_pageLink)
         }
 
         public async Task<CharactersPageData> GetCharactersPageAsync()
@@ -122,7 +64,7 @@ namespace MALParser.AnimePage
             return m_characters;
         }
 
-        private CharactersPageData GetCharactersPage()
+        public CharactersPageData GetCharactersPage()
         {
             if (m_characters != null)
                 return m_characters;
@@ -146,7 +88,7 @@ namespace MALParser.AnimePage
             return m_details;
         }
 
-        private DetailsPageData GetDetailsPage()
+        public DetailsPageData GetDetailsPage()
         {
             if (m_details != null)
                 return m_details;
@@ -170,7 +112,7 @@ namespace MALParser.AnimePage
             return m_episodes;
         }
 
-        private EpisodesPageData GetEpisodesPage()
+        public EpisodesPageData GetEpisodesPage()
         {
             if (m_episodes != null)
                 return m_episodes;
@@ -194,7 +136,7 @@ namespace MALParser.AnimePage
             return m_pictures;
         }
 
-        private PicturesPageData GetPicturesPage()
+        public PicturesPageData GetPicturesPage()
         {
             if (m_pictures != null)
                 return m_pictures;
@@ -218,7 +160,7 @@ namespace MALParser.AnimePage
             return m_reviews;
         }
 
-        private ReviewsPageData GetReviewsPage()
+        public ReviewsPageData GetReviewsPage()
         {
             if (m_reviews != null)
                 return m_reviews;
@@ -242,7 +184,7 @@ namespace MALParser.AnimePage
             return m_stats;
         }
 
-        private StatsPageData GetStatsPage()
+        public StatsPageData GetStatsPage()
         {
             if (m_stats != null)
                 return m_stats;
@@ -266,7 +208,7 @@ namespace MALParser.AnimePage
             return m_videos;
         }
 
-        private VideosPageData GetVideosPage()
+        public VideosPageData GetVideosPage()
         {
             if (m_videos != null)
                 return m_videos;
@@ -281,3 +223,74 @@ namespace MALParser.AnimePage
 
     }
 }
+
+//public CharactersPageData CharactersPage
+//{
+//    get
+//    {
+//        if (m_characters != null)
+//            return m_characters;
+//        else
+//            return GetCharactersPage();
+//    }
+//}
+//public DetailsPageData DetailsPage
+//{
+//    get
+//    {
+//        if (m_details != null)
+//            return m_details;
+//        else
+//            return GetDetailsPage();
+//    }
+//}
+//public EpisodesPageData EpisodesPage
+//{
+//    get
+//    {
+//        if (m_episodes != null)
+//            return m_episodes;
+//        else
+//            return GetEpisodesPage();
+//    }
+//}
+//public PicturesPageData PicturesPage
+//{
+//    get
+//    {
+//        if (m_pictures != null)
+//            return m_pictures;
+//        else
+//            return GetPicturesPage();
+//    }
+//}
+//public ReviewsPageData ReviewsPage
+//{
+//    get
+//    {
+//        if (m_reviews != null)
+//            return m_reviews;
+//        else
+//            return GetReviewsPage();
+//    }
+//}
+//public StatsPageData StatsPage
+//{
+//    get
+//    {
+//        if (m_stats != null)
+//            return m_stats;
+//        else
+//            return GetStatsPage();
+//    }
+//}
+//public VideosPageData VideosPage
+//{
+//    get
+//    {
+//        if (m_videos != null)
+//            return m_videos;
+//        else
+//            return GetVideosPage();
+//    }
+//}

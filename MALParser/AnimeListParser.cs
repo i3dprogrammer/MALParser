@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MALParser
 {
-    public static class AnimeListParser
+    internal static class AnimeListParser
     {
         private static HttpClient client = new HttpClient();
        
