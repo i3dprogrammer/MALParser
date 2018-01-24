@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using MALParser.Dto.AnimePageModels;
 using MALParser.Dto.Utility;
+using MALParser.Dto.ListModels;
 using MALParser.Dto;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MALParser
+namespace MALParser.Lists
 {
     internal static class AnimeListParser
     {
@@ -37,7 +38,7 @@ namespace MALParser
             {
                 foreach (var animeNode in doc.DocumentNode.Descendants("div").Where(x => x.GetAttributeValue("class", "") == "seasonal-anime js-seasonal-anime"))
                 {
-                    BaseAnimeEntry page = new BaseAnimeEntry()
+                    CoreAnimeEntry page = new CoreAnimeEntry()
                     {
                         Title = Utility.FixString(HtmlEntity.DeEntitize(animeNode.Descendants("p").First(x => x.GetAttributeValue("class", "") == "title-text").InnerText)),
                         AnimeLink = new LinkInfo(animeNode.Descendants("p").First(x => x.GetAttributeValue("class", "") == "title-text").Descendants("a").First().GetAttributeValue("href", "")),

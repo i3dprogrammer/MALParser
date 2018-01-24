@@ -7,16 +7,21 @@ using System.Threading.Tasks;
 
 namespace MALParser.Dto
 {
-    public class CoreAnimeEntry
+    public class CoreAnimeEntry : BaseAnimeEntry
     {
-        public string Title { get; set; }
-        public LinkInfo ImageLink { get; set; }
-        public LinkInfo AnimeLink { get; set; }
-        public string Type { get; set; } //Should add enum to this..
-        public string Synopsis { get; set; }
-        public string Episodes { get; set; }
+        //Main Info
+        public string Status { get; set; } //Should add enum to this..
+        public string Aired { get; set; }
+        public string Broadcast { get; set; }
 
-        public float Score { get; set; } = -1;
-        public int Members { get; set; } = -1;
+        //Usually only 1 studio, yet to find a link with two
+        public List<LinkInfo> Studios { get; set; } = new List<LinkInfo>();
+        public AnimeSourceType Source { get; set; }
+        public List<string> Genres { get; set; } = new List<string>();
+
+        public override string ToString()
+        {
+            return $"#{Type} - {Title} -> {Aired} + {Broadcast}";
+        }
     }
 }

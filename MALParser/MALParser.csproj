@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimeListManager.cs" />
+    <Compile Include="Lists\AnimeListManager.cs" />
     <Compile Include="AnimePage\Characters.cs" />
     <Compile Include="AnimePage\Controller.cs" />
     <Compile Include="AnimePage\Details.cs" />
@@ -53,11 +53,11 @@
     <Compile Include="AnimePage\Pictures.cs" />
     <Compile Include="AnimePage\Reviews.cs" />
     <Compile Include="AnimePage\Stats.cs" />
-    <Compile Include="Dto\AnimeListData.cs" />
-    <Compile Include="Dto\CoreAnimeEntry.cs" />
-    <Compile Include="Dto\SearchListData.cs" />
-    <Compile Include="AnimeSearchManager.cs" />
-    <Compile Include="SearchParser.cs" />
+    <Compile Include="Dto\ListModels\AnimeListData.cs" />
+    <Compile Include="Dto\BaseAnimeEntry.cs" />
+    <Compile Include="Dto\SearchModels\SearchListData.cs" />
+    <Compile Include="Search\AnimeSearchManager.cs" />
+    <Compile Include="Search\AnimeSearchParser.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="AnimePage\Videos.cs" />
     <Compile Include="Dto\AnimePageModels\AnimePageHeader.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Dto\AnimePageModels\EpisodesPageData.cs" />
     <Compile Include="Dto\Utility\BaseAnimeInfoActor.cs" />
     <Compile Include="Dto\AnimePageModels\PicturesPageData.cs" />
-    <Compile Include="Dto\BaseAnimeEntry.cs" />
+    <Compile Include="Dto\CoreAnimeEntry.cs" />
     <Compile Include="Dto\AnimePageModels\NewsPageData.cs" />
     <Compile Include="Dto\AnimePageModels\CharactersPageData.cs" />
     <Compile Include="Dto\Utility\LinkInfo.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Dto\AnimePageModels\VideosPageData.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AnimeListParser.cs" />
+    <Compile Include="Lists\AnimeListParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

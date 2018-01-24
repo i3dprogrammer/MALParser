@@ -37,7 +37,7 @@ namespace MALParser.AnimePage
             //m_pageLink = animePageLink;
         }
 
-        public Controller(CoreAnimeEntry entry)
+        public Controller(BaseAnimeEntry entry)
         {
             m_header = Header.Parse(entry.AnimeLink.Path);
         }
@@ -49,7 +49,7 @@ namespace MALParser.AnimePage
 
         public void Initialize()
         {
-            m_header = Header.Parse(m_pageLink)
+            m_header = Header.Parse(m_pageLink);
         }
 
         public async Task<CharactersPageData> GetCharactersPageAsync()

@@ -1,11 +1,12 @@
-﻿using MALParser.Dto;
+﻿using MALParser.Dto.SearchModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MALParser.Search;
 
-namespace MALParser
+namespace MALParser.Search
 {
     public class AnimeSearchManager
     {
@@ -133,14 +134,14 @@ namespace MALParser
         {
             CheckSettings();
 
-            return SearchParser.Parse(GenerateLink());
+            return AnimeSearchParser.Parse(GenerateLink());
         }
 
         public async Task<SearchListData> SearchAsync()
         {
             CheckSettings();
 
-            return await SearchParser.ParseAsync(GenerateLink());
+            return await AnimeSearchParser.ParseAsync(GenerateLink());
         }
 
         public void Reset()

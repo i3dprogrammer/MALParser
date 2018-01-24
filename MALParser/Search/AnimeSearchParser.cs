@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using MALParser.Dto;
 using MALParser.Dto.Utility;
+using MALParser.Dto.SearchModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MALParser
+namespace MALParser.Search
 {
-    internal class SearchParser
+    internal class AnimeSearchParser
     {
         private static HttpClient client = new HttpClient();
 
@@ -37,7 +38,7 @@ namespace MALParser
             {
                 foreach (var animeNode in doc.DocumentNode.Descendants("div").First(x => x.GetAttributeValue("class", "") == "js-categories-seasonal js-block-list list").Descendants("tr").Skip(1))
                 {
-                    CoreAnimeEntry info = new CoreAnimeEntry()
+                    BaseAnimeEntry info = new BaseAnimeEntry()
                     {
                         ImageLink = new LinkInfo(animeNode.Descendants("td").ElementAt(0).Descendants("img").First().GetAttributeValue("src", "")),
                         Title = HtmlEntity.DeEntitize(animeNode.Descendants("td").ElementAt(1).Descendants("a").First().InnerText),

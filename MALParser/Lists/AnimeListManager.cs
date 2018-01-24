@@ -1,11 +1,14 @@
 ﻿using MALParser.Dto;
+using MALParser.Dto.ListModels;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MALParser.Lists;
 
-namespace MALParser
+namespace MALParser.Lists
 {
     public class AnimeListManager
     {
@@ -35,7 +38,7 @@ namespace MALParser
 
         public async Task<AnimeListData> GetAiringScheduleAsync(ScheduleDay day)
         {
-            List<BaseAnimeEntry> list = new List<BaseAnimeEntry>();
+            List<CoreAnimeEntry> list = new List<CoreAnimeEntry>();
             var ret = await AnimeListParser.ParseAsync(m_malScheduleLink);
             ret.Animes.ForEach(x =>
             {
@@ -54,7 +57,7 @@ namespace MALParser
 
         public AnimeListData GetAiringSchedule(ScheduleDay day)
         {
-            List<BaseAnimeEntry> list = new List<BaseAnimeEntry>();
+            List<CoreAnimeEntry> list = new List<CoreAnimeEntry>();
             var ret = AnimeListParser.Parse(m_malScheduleLink);
             ret.Animes.ForEach(x =>
             {

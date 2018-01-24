@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MALParser.Lists;
 
-namespace MALParser.Dto
+namespace MALParser.Dto.ListModels
 {
-    public class SearchListData
+    public class AnimeListData
     {
         public List<CoreAnimeEntry> Animes { get; set; } = new List<CoreAnimeEntry>();
 
@@ -18,36 +19,36 @@ namespace MALParser.Dto
         internal LinkInfo NextPageLink { get; set; }
         internal LinkInfo PreviousPageLink { get; set; }
 
-        public async Task<SearchListData> ParseNextPageAsync()
+        public async Task<AnimeListData> ParseNextPageAsync()
         {
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return await SearchParser.ParseAsync(NextPageLink.Path);
+            return await AnimeListParser.ParseAsync(NextPageLink.Path);
         }
 
-        public SearchListData ParseNextPage()
+        public AnimeListData ParseNextPage()
         {
             if (NextPageLink == null)
                 throw new Exception("Cannot parse next page because it does not exist!");
 
-            return SearchParser.Parse(NextPageLink.Path);
+            return AnimeListParser.Parse(NextPageLink.Path);
         }
 
-        public async Task<SearchListData> ParsePreviousPageAsync()
+        public async Task<AnimeListData> ParsePreviousPageAsync()
         {
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return await SearchParser.ParseAsync(NextPageLink.Path);
+            return await AnimeListParser.ParseAsync(NextPageLink.Path);
         }
 
-        public SearchListData ParsePreviousPage()
+        public AnimeListData ParsePreviousPage()
         {
             if (PreviousPageLink == null)
                 throw new Exception("Cannot parse previous page because it does not exist!");
 
-            return SearchParser.Parse(NextPageLink.Path);
+            return AnimeListParser.Parse(NextPageLink.Path);
         }
     }
 }

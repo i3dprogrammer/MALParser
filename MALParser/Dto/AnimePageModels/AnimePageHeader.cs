@@ -7,7 +7,7 @@ using MALParser.Dto.Utility;
 
 namespace MALParser.Dto.AnimePageModels
 {
-    public class AnimePageHeader : BaseAnimeEntry
+    public class AnimePageHeader : CoreAnimeEntry
     {
         public LinkInfo Link_Details { get; set; }
         public LinkInfo Link_Videos { get; set; }
